@@ -166,8 +166,8 @@ Public Class RSSFeed
                             Author As String,
                              subtitle As String,
                             summery As String,
-                            category As String,
                             enclosure As String,
+                             category As String,
                             Guid As String,
                             explicit As String,
                             pubDate As DateTime,
@@ -191,16 +191,17 @@ Public Class RSSFeed
         thisitem.AppendChild(CreateTextElement("Author", Author))
         thisitem.AppendChild(CreateTextElement("subtitle", subtitle))
         thisitem.AppendChild(CreateTextElement("summery", summery))
-        thisitem.AppendChild(CreateTextElement("category", category))
         thisitem.AppendChild(CreateTextElement("enclosure", enclosure))
+        thisitem.AppendChild(CreateTextElement("category", category))
         thisitem.AppendChild(CreateTextElement("explicit", explicit))
-        thisitem.AppendChild(CreateTextElement("keywords", keywords))
+        thisitem.AppendChild(CreateTextElement("itunes:keywords", keywords))
         'keywords
         thisitem.AppendChild(CreateTextElement("guid",
                                                Guid,
                                                {New KeyValuePair(Of String, String)("isPermaLink", "false")}
                                                ))
         thisitem.AppendChild(CreateTextElement("pubDate", pubDate.ToString("r")))
+        thisitem.AppendChild(CreateTextElement("itunes:image", itunesimage))
 
         'Write the author node
         Dim creatorNode = Document.CreateNode(XmlNodeType.Element,

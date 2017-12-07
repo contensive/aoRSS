@@ -63,8 +63,10 @@ Namespace Interfaces
                     Dim podCastList As List(Of Models.BoadPodcastModel) = Models.BoadPodcastModel.createList(CP, "", orderBy)
                     For Each podCast As Models.BoadPodcastModel In podCastList
 
-                        rssfeed.WriteRSSItem(podCast.name, podCast.link, "Big O And Dukes", podCast.RSSDescription, "", "Comedy", "", podCast.ccguid, "Yes", podCast.RSSDatePublish, channelargument.ituneskeywords, podCast.imageFilename,)
-
+                        rssfeed.WriteRSSItem(podCast.name, podCast.link, "Big O And Dukes", podCast.RSSDescription, "", "", "Comedy", podCast.link, "Yes", podCast.RSSDatePublish, channelargument.ituneskeywords, podCast.imageFilename,)
+                        If podCast = 750 Then
+                            Exit For
+                        End If
                     Next
                     result = CP.Utils.EncodeHTML(rssfeed.ToString)
                     If ae.packageErrorList.Count > 0 Then
