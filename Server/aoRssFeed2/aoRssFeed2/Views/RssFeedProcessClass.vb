@@ -77,7 +77,7 @@ Namespace Views
                 '
                 ' -- create a list of all RSSFeeds content fields - these are the many-to-many fields that point to story records for each feed
                 Dim LastTableID As Integer = -1
-                Dim manyToManyFieldList As List(Of ContentFieldModel) = ContentFieldModel.createList(CP, "(name='RSSFeeds')and(type=" & FieldTypeManyToMany & ")and(authorable<>0)", "ContentID")
+                Dim manyToManyFieldList As List(Of ContentFieldModel) = ContentFieldModel.createList(CP, "(name='RSSFeeds')and(type=" & FieldTypeManyToMany & ")and(authorable<>0)", "contentid")
                 For Each manyToManyField In manyToManyFieldList
                     '
                     ' -- each many-to-many field represents a checked-box in the RSS Feed tab, associating a story to a feed.
@@ -173,7 +173,8 @@ Namespace Views
                 ' sort the entries in each feed in feedlist
                 ' tbd
                 For Each feed In feedList
-                    'feed.entryList.Sort((a, b) >= (a.ToString()[0].CompareTo(b.ToString()[0])))
+
+                    feed.entryList.Sort(Function(a, b) a.DatePublish.CompareTo(b.DatePublish))
                 Next
                 '
                 '

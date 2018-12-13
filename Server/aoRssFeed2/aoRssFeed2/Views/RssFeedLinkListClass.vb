@@ -20,7 +20,7 @@ Namespace Views
         Public Overrides Function Execute(ByVal CP As CPBaseClass) As Object
             Dim result As String = ""
             Try
-                Dim rssfeedList As List(Of Models.Db.RSSFeedModel) = Models.Db.RSSFeedModel.createList(CP, "")
+                Dim rssfeedList As List(Of Models.Db.RSSFeedModel) = Models.Db.RSSFeedModel.createList(CP, "", "id desc")
                 If (rssfeedList.Count = 0) Then
                     result = CP.Html.p("There are currently no public RSS Feeds available.")
                 Else
