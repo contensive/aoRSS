@@ -326,8 +326,8 @@ Number of Stories=99]]></ArgumentList>
 	<Addon name="Webcast Add-on" guid="{F6037DEE-023C-4A14-A972-ADAFA5538240}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID><![CDATA[aoWebcast.webcastClass]]></ActiveXProgramID>
-		<DotNetClass></DotNetClass>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.WebcastClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Media Link=[]ResourceLink
 Media Size=Medium-320x240[Small-160x120|Medium-320x240|Large-640x480]
 Hide Player=[yes]checkbox
@@ -486,8 +486,8 @@ end function
 	<Addon name="Webcast Page Footer" guid="{00B45603-ABAE-464C-BAB3-D0CD0874E7B1}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID><![CDATA[aoWebcast.WebcastFooterClass]]></ActiveXProgramID>
-		<DotNetClass></DotNetClass>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.WebcastFooterClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -651,4 +651,5 @@ end function
 	</CDef>
 	<Resource name="IconXML-25x13.gif" type="www" path="rssFeeds" />
 	<Resource name="aoRSSFeed2.dll" type="executable" path="" />
+	<Resource name="oiPlayerFiles.zip" type="www" path="" />
 </Collection>
