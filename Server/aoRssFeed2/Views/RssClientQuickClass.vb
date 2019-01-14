@@ -12,249 +12,108 @@ Namespace Views
     Public Class RssClientQuickClass
         Inherits AddonBaseClass
         '
-        ' - if nuget references are not there, open nuget command line and click the 'reload' message at the top, or run "Update-Package -reinstall" - close/open
-        ' - Verify project root name space is empty
-        ' - Change the namespace (AddonCollectionVb) to the collection name
-        ' - Change this class name to the addon name
-        ' - Create a Contensive Addon record with the namespace apCollectionName.ad
-        '
-        '=====================================================================================
-
-
-        'Option Explicit On
-        '
         Const RSSRootNode = "rss"
         Const AtomRootNode = "feed"
-        ''
-        Private main As Object
-        Private csv As Object
 
-        'Type EnclosureType
-        '    URL As String
-        '    Type As String
-        '    Length As String
-        'End Type
-        '
-        '========================================================================
-        '   v3.3 Compatibility
-        '       To make an Add-on that works the same in v3.3 and v3.4, use this adapter instead of the execute above
-        '========================================================================
-        '
-        'Public Overrides Function Execute(CP As CPBaseClass, CsvObject As Object, MainObject As Object, OptionString As String, FilterInput As String) As Object
         Public Overrides Function Execute(CP As CPBaseClass) As Object
-            'Dim CsvObject As Object
-            'Dim MainObject As Object
-            'Dim OptionString As String = ""
-            'Dim FilterInput As String = ""
-            'csv = CsvObject
             Return GetContent(CP)
-            'Execute = CP.Doc.GetText(OptionString)
         End Function
-
-        'Private Sub Init(mainObject As CPBaseClass)
-        '    Throw New NotImplementedException()
-        'End Sub
-
-
-        ''
-        ''========================================================================
-        ''   Init()
-        ''========================================================================
-        ''
-        'Public Sub Init(cp As CPBaseClass, MainObject As Object)
-
-        '    Try
-        '        main = MainObject
-        '        Exit Sub
-        '        '
-
-        '    Catch ex As Exception
-        '        cp.Site.ErrorReport(ex)
-        '    End Try
-        '    Return
-        'End Sub
-        '
-        '=================================================================================
-        '   Aggregate Object Interface
-        '=================================================================================
         '
         Public Function GetContent(cp As CPBaseClass) As String
             Dim result As String = ""
             Try
-                '
                 Dim IsRSS As Boolean
                 Dim isAtom As Boolean
-                '
-                'Dim ItemPubDate As String
-                'Dim EnclosureRow As String
-                'Dim Ptr As Long
-                'Dim Found As Boolean
-                'Dim EnclosureCnt As Long
-                'Dim Enclosure() As EnclosureType
-                'Dim ChannelImage As String
-                'Dim ChannelTitle As String
-                'Dim ChannelDescription As String
-                'Dim ChannelPubDate As String
-                'Dim ChannelItem As String
-                'Dim ChannelLink As String
-                'Dim NewChannelImage As String
-                ''
-                'Dim ItemLink As String
-                'Dim ItemTitle As String
-                'Dim ItemDescription As String
-                ''
-                'Dim ImageWidth As String
-                'Dim ImageHeight As String
-                'Dim ImageTitle As String
-                'Dim ImageURL As String
-                'Dim ImageLink As String
-                '
                 Dim FeedHeader As String
-                '   Dim VersionString As String = ""
-                'Dim UserError As String
                 Dim LastRefresh As Date
                 Dim RefreshHours As Double
-                Dim Feed As String
+                Dim Feed As String = ""
                 Dim FeedConfig As String
                 Dim ConfigHeader As String
                 Dim ConfigSplit() As String
                 Dim doc As Xml.XmlDocument
-                'Dim RootNode As Xml.XmlNode
-                'Dim ChannelNode As Xml.XmlNode
-                'Dim ItemNode As Xml.XmlNode
-                'Dim ImageNode As Xml.XmlNode
-                'Dim LoopPtr As Long
                 Dim FeedFilename As String = ""
                 Dim Link As String
                 Dim SaveCache As Boolean
                 Dim MaxStories As Long
-                'Dim app As Object
                 Dim instanceId As String = cp.Doc.GetText("instanceId")
-                If True Then
-                    SaveCache = False
-                    Link = Trim(cp.Doc.GetText("URL"))
-                    RefreshHours = cp.Utils.EncodeNumber(cp.Doc.GetText("RefreshHours"))
-                    MaxStories = cp.Utils.EncodeInteger(cp.Doc.GetText("Number of Stories"))
-
-                    If MaxStories = 0 Then
-                        MaxStories = 99
-                    End If
-                    If Link = "" Then
-                        '
-                        ' No link provided
-                        '
-                        If cp.User.IsAdmin Then
-                            ' GetContent = main.GetAdminHintWrapper("The RSS Quick Client requires a URL to continue.")
-                        End If
-                    Else
-
-                        'Link Providers
-
-                        SaveCache = True
-                        'VersionString = app.Major & "." & app.Minor & "." & app.Revision
-                        FeedFilename = encodeFilename(Link)
-                        FeedFilename = "aoRSSClientFiles\" & FeedFilename & ".txt"
-                        FeedConfig = cp.File.ReadVirtual(FeedFilename)
-                        If Not FeedConfig <> "" Then
-                            ConfigHeader = cp.Doc.GetText(FeedConfig)
-                            If ConfigHeader <> "" Then
-                                ConfigSplit = Split(ConfigHeader, ":")
-                                If Trim(LCase(ConfigSplit(0))) = "rss client quick reader" Then
-                                    If True Then
-                                        LastRefresh = cp.Utils.EncodeDate(cp.Doc.GetDate(FeedConfig))
-                                        If LastRefresh <> CDate("0") Then
-                                            If (LastRefresh.AddHours(RefreshHours) > Now()) Then
-                                                '
-                                                ' Use the cached feed
-                                                '
-                                                Feed = FeedConfig
-                                                SaveCache = False
-                                            End If
+                SaveCache = False
+                Link = Trim(cp.Doc.GetText("URL"))
+                RefreshHours = cp.Utils.EncodeNumber(cp.Doc.GetText("RefreshHours"))
+                MaxStories = cp.Utils.EncodeInteger(cp.Doc.GetText("Number of Stories"))
+                If MaxStories = 0 Then
+                    MaxStories = 99
+                End If
+                If Link <> "" Then
+                    SaveCache = True
+                    FeedFilename = encodeFilename(Link)
+                    FeedFilename = "aoRSSClientFiles\" & FeedFilename & ".txt"
+                    FeedConfig = cp.File.ReadVirtual(FeedFilename)
+                    If Not FeedConfig <> "" Then
+                        ConfigHeader = cp.Doc.GetText(FeedConfig)
+                        If ConfigHeader <> "" Then
+                            ConfigSplit = Split(ConfigHeader, ":")
+                            If Trim(LCase(ConfigSplit(0))) = "rss client quick reader" Then
+                                If True Then
+                                    LastRefresh = cp.Utils.EncodeDate(cp.Doc.GetDate(FeedConfig))
+                                    If LastRefresh <> CDate("0") Then
+                                        If (LastRefresh.AddHours(RefreshHours) > Now()) Then
+                                            '
+                                            ' Use the cached feed
+                                            '
+                                            Feed = FeedConfig
+                                            SaveCache = False
                                         End If
                                     End If
                                 End If
                             End If
                         End If
-                        If Feed = "" Then
-                            '
-                            ' Get a new copy of the feed
-                            '
-                            doc = New Xml.XmlDocument
-                            doc.Load(Link)
-                            'Do While doc.readyState <> 4 And LoopPtr < 100
-                            '    Sleep(100)
-                            '    DoEvents
-                            '    LoopPtr = LoopPtr + 1
-                            'Loop
-                            'If doc.parseError.errorCode <> 0 Then
-                            '    '
-                            '    ' error - Need a way to reach the user that submitted the file
-                            '    '
-                            '    If main.IsAdmin Then
-                            '        GetContent = main.GetAdminHintWrapper("The RSS Feed [" & Link & "] caused an error, " & doc.parseError.reason)
-                            '    End If
-                            'Else
-                            '    '
-                            ' Retrieved document OK
-                            '
-                            Feed = doc.InnerXml
-                            SaveCache = True
-                        End If
                     End If
-
-                    If Feed <> "" Then
+                    If Feed = "" Then
+                        '
+                        ' Get a new copy of the feed
                         doc = New Xml.XmlDocument
-                        doc.LoadXml(Feed)
-                        'Do While doc.readyState <> 4 And LoopPtr < 100
-                        '    Sleep(100)
-                        '    DoEvents
-                        '    LoopPtr = LoopPtr + 1
-                        'Loop
-                        'If doc.parseError.errorCode <> 0 Then
-                        '    '
-                        '    ' error - Need a way to reach the user that submitted the file
-                        '    '
-                        '    If Me.main.IsAdmin Then
-                        '        GetContent = Me.main.GetAdminHintWrapper("The RSS Feed [" & Link & "] caused an error, " & doc.parseError.reason)
-                        '    End If
-                        'Else
-                        With doc.DocumentElement
-                            '
-                            If (LCase(.Name) = LCase(RSSRootNode)) Then
-                                '
-                                ' RSS Feed
-                                '
-                                IsRSS = True
-                                GetContent = GetRSS(cp, doc.InnerXml, MaxStories)
-                            ElseIf (LCase(.Name) = LCase(AtomRootNode)) Then
-                                '
-                                ' Atom Feed
-                                '
-                                isAtom = True
-                                GetContent = GetAtom(cp, doc.InnerXml, CType(MaxStories, String))
-                            Else
-                                '
-                                ' Bad Feed
-                                '
-                                If cp.User.IsAdmin Then
-                                    GetContent = cp.Html.adminHint("The RSS Feed [" & Link & "] returned an incompatible file.")
-                                End If
-                            End If
-                        End With
-                        '
-                        ' Save this feed into the cache
-                        '
-                        If SaveCache Then
-                            FeedHeader = "RSS Client Quick Reader : " _
-                                        & vbCrLf & CStr(Now())
-                            Call cp.File.SaveVirtual(FeedFilename, FeedHeader & vbCrLf & Feed)
-                        End If
+                        doc.Load(Link)
+                        Feed = doc.InnerXml
+                        SaveCache = True
                     End If
                 End If
-                'End If
-                result = GetContent
 
-                '
+                If Feed <> "" Then
+                    doc = New Xml.XmlDocument
+                    doc.LoadXml(Feed)
+                    With doc.DocumentElement
+                        '
+                        If (LCase(.Name) = LCase(RSSRootNode)) Then
+                            '
+                            ' RSS Feed
+                            '
+                            IsRSS = True
+                            result = GetRSS(cp, doc.InnerXml, MaxStories)
+                        ElseIf (LCase(.Name) = LCase(AtomRootNode)) Then
+                            '
+                            ' Atom Feed
+                            '
+                            isAtom = True
+                            result = GetAtom(cp, doc.InnerXml, CType(MaxStories, String))
+                        Else
+                            '
+                            ' Bad Feed
+                            '
+                            If cp.User.IsAdmin Then
+                                result = cp.Html.adminHint("The RSS Feed [" & Link & "] returned an incompatible file.")
+                            End If
+                        End If
+                    End With
+                    '
+                    ' Save this feed into the cache
+                    '
+                    If SaveCache Then
+                        FeedHeader = "RSS Client Quick Reader : " _
+                                        & vbCrLf & CStr(Now())
+                        Call cp.File.SaveVirtual(FeedFilename, FeedHeader & vbCrLf & Feed)
+                    End If
+                End If
             Catch ex As Exception
                 cp.Site.ErrorReport(ex)
             End Try
