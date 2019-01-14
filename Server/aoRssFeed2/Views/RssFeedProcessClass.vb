@@ -32,7 +32,7 @@ Namespace Views
                 '
                 ' Load the feeds
                 Dim feedList As New List(Of Models.Domain.FeedModel)
-                For Each dbFeed As RSSFeedModel In BaseModel.createList(Of RSSFeedModel)(CP, "", "")
+                For Each dbFeed As RSSFeedModel In BaseModel.createList(Of RSSFeedModel)(CP, "", "id desc")
                     Dim feed As New Models.Domain.FeedModel With {
                         .Id = dbFeed.id,
                         .Name = dbFeed.name,
@@ -77,7 +77,7 @@ Namespace Views
                 '
                 ' -- create a list of all RSSFeeds content fields - these are the many-to-many fields that point to story records for each feed
                 Dim LastTableID As Integer = -1
-                Dim manyToManyFieldList As List(Of ContentFieldModel) = BaseModel.createList(Of ContentFieldModel)(CP, "(name='RSSFeeds')and(type=" & FieldTypeManyToMany & ")and(authorable<>0)", "contentid")
+                Dim manyToManyFieldList As List(Of ContentFieldModel) = BaseModel.createList(Of ContentFieldModel)(CP, "(name='RSSFeeds')and(type=" & FieldTypeManyToMany & ")and(authorable<>0)", "id desc")
                 For Each manyToManyField In manyToManyFieldList
                     '
                     ' -- each many-to-many field represents a checked-box in the RSS Feed tab, associating a story to a feed.
@@ -174,7 +174,7 @@ Namespace Views
                 ' tbd
                 For Each feed In feedList
 
-                    feed.entryList.Sort(Function(a, b) a.DatePublish.CompareTo(b.DatePublish))
+                    feed.entryList.Sort(Function(a, b) b.DatePublish.CompareTo(a.DatePublish))
                 Next
                 '
                 '

@@ -303,7 +303,7 @@ Namespace Models.Db
                             If (targetNullable And (String.IsNullOrEmpty(propertyValueText))) Then
                                 '
                                 ' -- null value in a nullable property - save a blank value to a Db field
-                                cs.SetField(instanceProperty.Name, Nothing)
+                                cs.SetField(instanceProperty.Name, "")
                             Else
                                 '
                                 ' -- not nullable or value is not null

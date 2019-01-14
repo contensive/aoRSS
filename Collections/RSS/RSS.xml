@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="RSS" guid="{06791870-0EF8-48CB-AC54-2327FF5A1C40}" system="No" updatable="Yes" blockNavigatorNode="No">
+<Collection name="RSS" guid="{06791870-0ef8-48cb-ac54-2327ff5a1c40}" system="No" updatable="Yes" blockNavigatorNode="No">
 	<HelpLink>http://support.contensive.com/rss-feeds</HelpLink>
 	<Help></Help>
 	<Addon name="RSS Aggregator" guid="{1BC315FB-1ACA-4FB2-8615-DAEDBB88B5A0}" type="Add-on">
@@ -39,8 +39,7 @@ Story Count=5]]></ArgumentList>
 		<OtherHeadTags></OtherHeadTags>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
-		<Styles><![CDATA[
-ul.rssAggregator { list-style-type: none}
+		<Styles><![CDATA[ul.rssAggregator { list-style-type: none}
 
 ul.rssAggregator li.raItem {}
 
@@ -62,14 +61,13 @@ ul.rssAggregator li p.raDescription {}
 
 
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Aggregator Process" guid="{A1635E99-01BB-4393-9555-FD69F2B0C3EE}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.----Class]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RefreshProcessClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -102,7 +100,6 @@ ul.rssAggregator li p.raDescription {}
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 		<ProcessTriggers>
 			<ContentChange name="RSS Aggregators" guid="{9BE833BA-40D2-41F6-9088-65B2F254CD8B}"/>
@@ -114,7 +111,7 @@ ul.rssAggregator li p.raDescription {}
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssFeedLinkClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.RssFeedLinkClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Feed=[SelectContentName("RSS Feeds")]]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -152,6 +149,7 @@ ul.rssAggregator li p.raDescription {}
 
 
 
+
 .RSSFeedImage {border:0px;vertical-align:middle;}
 .RSSFeedLink .RSSFeedImage {border:0px;}
 .RSSFeedLink {}
@@ -160,14 +158,13 @@ ul.rssAggregator li p.raDescription {}
 .RSSFeedLink A:hover {}
 .RSSFeedLink A .RSSFeedImage {border:0px;}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Link List" guid="{B52F5254-6CF9-4890-A8AC-F2E811B42940}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssFeedLinkListClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.RssFeedLinkListClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -202,6 +199,7 @@ ul.rssAggregator li p.raDescription {}
 		<Styles><![CDATA[
 
 
+
 .RSSFeedImage {border:0px;vertical-align:middle;}
 .RSSFeedList .RSSFeedImage {border:0px;vertical-align:middle;}
 .RSSFeedList A .RSSFeedImage {border:0px;vertical-align:middle;}
@@ -211,14 +209,13 @@ ul.rssAggregator li p.raDescription {}
 .RSSFeedList .RSSFeedListItem A:visited {}
 .RSSFeedList .RSSFeedListItem A:hover {}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Process" guid="{2119C2DA-1D57-4C32-B13C-28CD2D85EDF5}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssFeedProcessClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.RssFeedProcessClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -251,7 +248,6 @@ ul.rssAggregator li p.raDescription {}
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 		<ProcessTriggers>
 			<ContentChange name="RSS Feeds" guid="{8808CE15-6204-4E2E-B650-3730AAB0F3EF}"/>
@@ -299,7 +295,6 @@ Number of Stories=99]]></ArgumentList>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
 
-
 .ChannelItem {clear:both}
 .ChannelTitle{margin: 10px 0 5px 0;font-size:120%;font-weight:bold;}
 .ChannelTitle A {text-decoration:none! important;color:black! important;}
@@ -320,174 +315,13 @@ Number of Stories=99]]></ArgumentList>
 .ItemEnclosure A:visited{text-decoration:none;color:#404040;}
 .ItemEnclosure A:hover{text-decoration:underline;color:#404040;}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
-	</Addon>
-	<Addon name="Webcast Add-on" guid="{F6037DEE-023C-4A14-A972-ADAFA5538240}" type="Add-on">
-		<Copy></Copy>
-		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.WebcastClass]]></DotNetClass>
-		<ArgumentList><![CDATA[Media Link=[]ResourceLink
-Media Size=Medium-320x240[Small-160x120|Medium-320x240|Large-640x480]
-Hide Player=[yes]checkbox
-Auto Start=[yes]checkbox]]></ArgumentList>
-		<AsAjax>No</AsAjax>
-		<Filter>No</Filter>
-		<Help></Help>
-		<HelpLink></HelpLink>
-		<Icon Link="" width="0" height="0" sprites="0" />
-		<InIframe>No</InIframe>
-		<BlockEditTools>No</BlockEditTools>
-		<FormXML></FormXML>
-		<IncludeAddon name="JQuery" guid="{9C882078-0DAC-48E3-AD4B-CF2AA230DF80}"/>
-		<IsInline>No</IsInline>
-		<JavascriptInHead><![CDATA[$(document).ready(function() {
-    $('body.oiplayer-example').oiplayer({
-        'server' : 'http://www.openimages.eu',
-        'jar' : '/oiplayer/plugins/cortado-ovt-stripped-wm_r38710.jar',
-        'flash' : '/oiplayer/plugins/flowplayer-3.1.5.swf',
-        'controls' : 'top',
-        'log' : 'error'
-    });
-});
-
-function ShowWebcastPlayer( Instance, strMediaFile, numWidth, numHeight, strAutoStart, strPreviewImg) {
-	var refPlayerDiv = document.getElementById( 'Player'+Instance );
-	var refPlayLink = document.getElementById( 'Show'+Instance );
-	var refHideLink = document.getElementById( 'Hide'+Instance );
-	if(refPlayerDiv == undefined) {
-		return false;
-	}
-	refHideLink.style.display='inline';
-	refPlayLink.style.display='none';
-	refPlayerDiv.style.display='block';
-	//var Player=GetWebcastPlayer( Instance, strMediaFile, numWidth, numHeight, strAutoStart, strPreviewImg);
-	//refPlayerDiv.innerHTML=Player;
-}
-function HideWebcastPlayer( Instance, strMediaFile, numWidth, numHeight, strAutoStart, strPreviewImg) {
-	var refPlayerDiv = document.getElementById( 'Player'+Instance );
-	var refPlayLink = document.getElementById( 'Show'+Instance );
-	var refHideLink = document.getElementById( 'Hide'+Instance);
-	if(refPlayerDiv == undefined) {
-		return false;
-	}
-	refHideLink.style.display='none';
-	refPlayLink.style.display='inline';
-	refPlayerDiv.style.display='none';
-	var pos = strMediaFile.lastIndexOf('\.');
-	pos = pos+1;
-	var strExt = strMediaFile.substring(pos);
-	strExt = strExt.toLowerCase();
-	//if(strExt == 'mp3') {
-	//	ap_stopAll();
-	//}
-	//refPlayerDiv.innerHTML='';
-}
-
-function ShowWebcastPopupPlayer( Instance, strMediaFile, numWidth, numHeight) {
-	var refPlayerDiv = document.getElementById( 'Player'+Instance );
-	var refPlayLink = document.getElementById( 'Show'+Instance );
-	var refHideLink = document.getElementById( 'Hide'+Instance );
-	var player;
-	//player = GetWebcastPlayer(1, strMediaFile, numWidth, numHeight, 'true');
-	player = refPlayerDiv.innerHTML;
-	if(refPlayerDiv != undefined) {
-		refHideLink.style.display='none';
-		refPlayLink.style.display='inline';
-		refPlayerDiv.style.display='none';
-		//if(document.getElementById('winplayer') != undefined) {
-		//	if(document.getElementById('winplayer').controls) {
-		//		document.getElementById('winplayer').controls.stop();
-		//	}
-		//} else {
-		//	refPlayerDiv.innerHTML='';
-		//}
-	}
-	var strResult = '<HTML>\n';
-	strResult += '<HEAD>\n';
-	strResult += '<TITLE>Webcast Popup Player</TITLE>\n';
-	strResult += '</HEAD>\n';
-	strResult += '<BODY style="margin:0px;padding:0px;text-align:center;">\n';
-	strResult += '<div>'+player+'</div>';
-	strResult += '</BODY>\n';
-	strResult += '</HTML>';
-	if (typeof numWidth == 'undefined' || numWidth == '') {
-		numWidth = 320;
-		numHeight = 240;
-	}
-	if (typeof numHeight == 'undefined' || numHeight == '') {
-		numWidth = 320;
-		numHeight = 240;
-	}
-	var PopupWidth = numWidth;
-	var PopupHeight = numHeight;
-	newwindow=window.open('', 'WebcastPlayer', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width='+PopupWidth+',height='+PopupHeight);
-	newdocument=newwindow.document;
-	newdocument.write(strResult);
-	newdocument.close();
-}]]></JavascriptInHead>
-		<javascriptForceHead>No</javascriptForceHead>
-		<JSHeadScriptSrc></JSHeadScriptSrc>
-		<!-- deprecated --><JSBodyScriptSrc></JSBodyScriptSrc>
-		<!-- deprecated --><JavascriptBodyEnd></JavascriptBodyEnd>
-		<!-- deprecated --><JavascriptOnLoad></JavascriptOnLoad>
-		<Content>Yes</Content>
-		<Template>Yes</Template>
-		<Email>No</Email>
-		<Admin>Yes</Admin>
-		<OnPageEndEvent>No</OnPageEndEvent>
-		<OnPageStartEvent>No</OnPageStartEvent>
-		<OnBodyStart>No</OnBodyStart>
-		<OnBodyEnd>No</OnBodyEnd>
-		<RemoteMethod>No</RemoteMethod>
-		<ProcessRunOnce>No</ProcessRunOnce>
-		<ProcessInterval>0</ProcessInterval>
-		<MetaDescription></MetaDescription>
-		<OtherHeadTags><![CDATA[ <script src="/plugins/flowplayer-3.1.4.min.js" type="text/javascript"><!-- help ie --></script>
-  <script src="/js/jquery.oiplayer.js" type="text/javascript"><!-- help ie --></script>
-  <link href="/css/oiplayer.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript">
-  $(document).ready(function() {
-      $('body').oiplayer({
-          server : 'http://www.openimages.eu', /* msie (or java) has issues with just a dir */
-          jar : '/oiplayer/plugins/cortado-ovt-stripped-wm_r38710.jar',
-          flash : '/oiplayer/plugins/flowplayer-3.1.5.swf',
-          controls : 'top'
-      });
-  });
-  </script>]]></OtherHeadTags>
-		<PageTitle></PageTitle>
-		<RemoteAssetLink></RemoteAssetLink>
-		<Styles><![CDATA[.WebcastContainer{display:table;}
-.WebcastContainer .PlayerContainer {border:1px solid #808080;background-color:#f0f0f0;padding:2px;}
-.WebcastContainer .ToolsContainer {border:1px solid #808080;background-color:#e0e0e0;padding:4px;}
-.WebcastContainer .ToolsContainer A.Show {text-decoration:none;padding:2px;}
-.WebcastContainer .ToolsContainer A.Show:hover {text-decoration:none;background-color:#a0a0a0}
-.WebcastContainer .ToolsContainer A.Show:visited{text-decoration:none;}
-.WebcastContainer .ToolsContainer A.Hide {text-decoration:none;padding:2px;}
-.WebcastContainer .ToolsContainer A.Hide:hover {text-decoration:none;background-color:#a0a0a0}
-.WebcastContainer .ToolsContainer A.Hide:visited {text-decoration:none;}
-.WebcastContainer .ToolsContainer A.Popup {text-decoration:none;padding:2px;}
-.WebcastContainer .ToolsContainer A.Popup:hover {text-decoration:none;background-color:#a0a0a0}
-.WebcastContainer .ToolsContainer A.Popup:visited {text-decoration:none;}
-.WebcastContainer .ToolsContainer A.Download {text-decoration:none;padding:2px;}
-.WebcastContainer .ToolsContainer A.Download:hover {text-decoration:none;background-color:#a0a0a0}
-.WebcastContainer .ToolsContainer A.Download:visited {text-decoration:none;}
-.WebcastContainer .ToolsContainer {font-size:11px}
-]]></Styles>
-		<styleslinkhref></styleslinkhref>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000">
-			<Code><![CDATA[function m
-end function
-]]></Code>
-		</Scripting>
 	</Addon>
 	<Addon name="Webcast Page Footer" guid="{00B45603-ABAE-464C-BAB3-D0CD0874E7B1}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.WebcastFooterClass]]></DotNetClass>
+		<ActiveXProgramID><![CDATA[aoWebcast.WebcastFooterClass]]></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -520,7 +354,6 @@ end function
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<CDef Name="Page Content" guid="{02203F58-0921-4F75-A089-0EAD6E8FEB4F}" >
@@ -599,7 +432,7 @@ end function
 		<Field Name="active" active="True" AdminOnly="False" Authorable="True" Caption="Active" DeveloperOnly="False" EditSortPriority="200" FieldType="Boolean" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="1" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
 		<Field Name="sortorder" active="True" AdminOnly="False" Authorable="False" Caption="Alpha Sort Order" DeveloperOnly="False" EditSortPriority="2000" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
 		<Field Name="rssfeedid" active="True" AdminOnly="False" Authorable="True" Caption="RSS Feed" DeveloperOnly="False" EditSortPriority="1000" FieldType="Lookup" HTMLContent="False" IndexColumn="10" IndexSortDirection="" IndexSortOrder="99" IndexWidth="27" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="RSS Feeds" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
-		<Field Name="blogpostid" active="True" AdminOnly="False" Authorable="True" Caption="Blog Post" DeveloperOnly="False" EditSortPriority="1010" FieldType="Lookup" HTMLContent="False" IndexColumn="20" IndexSortDirection="" IndexSortOrder="99" IndexWidth="27" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="Blog Entries" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="blogpostid" active="True" AdminOnly="False" Authorable="True" Caption="Blog Post" DeveloperOnly="False" EditSortPriority="1010" FieldType="Lookup" HTMLContent="False" IndexColumn="20" IndexSortDirection="" IndexSortOrder="99" IndexWidth="27" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
 	</CDef>
 	<CDef Name="RSS Feed Newsletter Issue Page Rules" Active="1" AdminOnly="0" AllowAdd="1" AllowCalendarEvents="0" AllowContentChildTool="0" AllowContentTracking="0" AllowDelete="1" AllowMetaContent="" AllowTopicRules="0" AllowWorkflowAuthoring="0" AuthoringDataSourceName="Default" AuthoringTableName="ccRSSFeedRules" ContentDataSourceName="Default" ContentTableName="ccRSSFeedRules" DefaultSortMethod="By Name" DeveloperOnly="1" DropDownFieldList="Name" EditorGroupName="" Parent="" IconLink="" IconHeight="0" IconWidth="0" IconSprites="0" isbasecontent="0" guid="{A07BD4CF-CB73-4346-AE4A-EC66C8D897CE}" >
 		<Field Name="name" active="True" AdminOnly="False" Authorable="True" Caption="Name" DeveloperOnly="False" EditSortPriority="110" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
@@ -610,7 +443,7 @@ end function
 		<Field Name="rssfeedid" active="True" AdminOnly="False" Authorable="True" Caption="RSS Feed" DeveloperOnly="False" EditSortPriority="300" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
 			<HelpDefault><![CDATA[When selected, this rule only applies to this RSS Feed.]]></HelpDefault>
 		</Field>
-		<Field Name="newsletterissuepageid" active="True" AdminOnly="False" Authorable="True" Caption="Newsletter Story" DeveloperOnly="False" EditSortPriority="310" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="Newsletter Stories" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
+		<Field Name="newsletterissuepageid" active="True" AdminOnly="False" Authorable="True" Caption="Newsletter Story" DeveloperOnly="False" EditSortPriority="310" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
 			<HelpDefault><![CDATA[When selected, this rule only applies to this Newsletter Story.]]></HelpDefault>
 		</Field>
 	</CDef>
@@ -650,7 +483,5 @@ end function
 		</Field>
 	</CDef>
 	<Resource name="IconXML-25x13.gif" type="www" path="rssFeeds" />
-	<Resource name="aoRSS.dll" type="executable" path="" />
-	<Resource name="aoRss.dll.config" type="executable" path="" />
-	<Resource name="oiPlayerFiles.zip" type="www" path="" />
+	<Resource name="aoRSSFeed2.dll" type="executable" path="" />
 </Collection>
