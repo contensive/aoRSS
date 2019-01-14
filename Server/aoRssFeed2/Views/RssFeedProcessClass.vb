@@ -3,7 +3,7 @@ Option Strict On
 Option Explicit On
 
 Imports Contensive.BaseClasses
-Imports Contensive.Addons.aoRssFeed2.Models.Db
+Imports Contensive.Addons.Rss.Models.Db
 
 Namespace Views
     '

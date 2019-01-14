@@ -3,9 +3,9 @@ Option Strict On
 Option Explicit On
 
 Imports System.Linq
-Imports Contensive.Addons.aoRssFeed2
-Imports Contensive.Addons.aoRssFeed2.Controllers
-Imports Contensive.Addons.aoRssFeed2.Models.Db
+Imports Contensive.Addons.Rss
+Imports Contensive.Addons.Rss.Controllers
+Imports Contensive.Addons.Rss.Models.Db
 Imports Contensive.BaseClasses
 
 Namespace Views

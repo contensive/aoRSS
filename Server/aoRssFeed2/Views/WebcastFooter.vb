@@ -2,8 +2,8 @@
 Option Strict On
 Option Explicit On
 
-Imports Contensive.Addons.aoRssFeed2
-Imports Contensive.Addons.aoRssFeed2.Controllers
+Imports Contensive.Addons.Rss
+Imports Contensive.Addons.Rss.Controllers
 Imports Contensive.BaseClasses
 
 Namespace Views

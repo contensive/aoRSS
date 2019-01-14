@@ -2,7 +2,7 @@
 Option Explicit On
 Option Strict On
 
-Imports AddonCollectionVb.Controllers
+
 Imports Contensive.Addons.aoRSSClient2.Controllers
 Imports Contensive.BaseClasses
 '

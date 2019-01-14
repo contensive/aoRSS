@@ -3,7 +3,7 @@ Option Strict On
 Option Explicit On
 
 Imports System.Linq
-Imports AddonCollectionVb.Controllers
+
 Imports Contensive.Addons.aoRSSClient2.Controllers
 Imports Contensive.Addons.aoRSSClient2.Models
 Imports Contensive.BaseClasses

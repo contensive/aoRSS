@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{284DF079-3C6F-4F00-944C-9C2995C7D24E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Contensive.Addons.aoRssFeed2</RootNamespace>
-    <AssemblyName>aoRssFeed2</AssemblyName>
+    <RootNamespace>Contensive.Addons.Rss</RootNamespace>
+    <AssemblyName>aoRss</AssemblyName>
     <MyType>Windows</MyType>
     <SccProjectName>
     </SccProjectName>
@@ -32,7 +32,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>aoRssFeed2.xml</DocumentationFile>
+    <DocumentationFile>aoRss.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
@@ -43,7 +43,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>aoRssFeed2.xml</DocumentationFile>
+    <DocumentationFile>aoRss.xml</DocumentationFile>
     <NoWarn>42353,42354,42355</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
@@ -96,7 +96,7 @@
     <Compile Include="Models\Domain\_blankModel.vb" />
     <Compile Include="Views\AggregatorClass.vb" />
     <Compile Include="Views\IXMLDOMNode.vb" />
-    <Compile Include="Views\QuickClass.vb" />
+    <Compile Include="Views\RssClientQuickClass.vb" />
     <Compile Include="Views\RefreshProcessClass.vb" />
     <Compile Include="Views\RssFeedLinkListClass.vb" />
     <Compile Include="Views\RssFeedLinkClass.vb" />

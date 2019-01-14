@@ -3,8 +3,8 @@ Option Strict On
 Option Explicit On
 
 
-Imports Contensive.Addons.aoRssFeed2
-Imports Contensive.Addons.aoRssFeed2.Controllers
+Imports Contensive.Addons.Rss
+Imports Contensive.Addons.Rss.Controllers
 Imports Contensive.BaseClasses
 '
 Namespace Views
@@ -37,7 +37,7 @@ Namespace Views
                         Dim test As String = objectValueFromUI.firstname
                         '
                         ' -- create sample data
-                        Dim personList As List(Of aoRssFeed2.Models.Db.PeopleModel) = Models.Db.BaseModel.createList(Of Models.Db.PeopleModel)(cp, "", "")
+                        Dim personList As List(Of Rss.Models.Db.PeopleModel) = Models.Db.BaseModel.createList(Of Models.Db.PeopleModel)(cp, "", "")
                         '
                         ' -- add sample data to a node
                         ae.packageNodeList.Add(New applicationController.packageNodeClass With {

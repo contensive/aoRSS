@@ -7,7 +7,7 @@ Option Strict On
 'Imports Contensive.BaseClasses
 'Imports AddonCollectionVb.Models
 'Imports AddonCollectionVb.Views
-'Imports AddonCollectionVb.Controllers
+'
 
 Namespace Controllers
     Public NotInheritable Class genericController

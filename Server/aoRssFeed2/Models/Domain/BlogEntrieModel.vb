@@ -5,7 +5,7 @@ Option Strict On
 Imports System
 Imports System.Collections.Generic
 Imports System.Text
-Imports Contensive.Addons.aoRssFeed2.Models.Db
+Imports Contensive.Addons.Rss.Models.Db
 Imports Contensive.BaseClasses
 
 Namespace Models.Domain

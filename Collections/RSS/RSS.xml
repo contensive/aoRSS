@@ -5,8 +5,8 @@
 	<Addon name="RSS Aggregator" guid="{1BC315FB-1ACA-4FB2-8615-DAEDBB88B5A0}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID><![CDATA[aoRSSClient.AggregatorClass]]></ActiveXProgramID>
-		<DotNetClass></DotNetClass>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.AggregatorClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Aggregator=[List(RSS Aggregators)]
 Story Count=5]]></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -68,8 +68,8 @@ ul.rssAggregator li p.raDescription {}
 	<Addon name="RSS Aggregator Process" guid="{A1635E99-01BB-4393-9555-FD69F2B0C3EE}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID><![CDATA[aorssClient.refreshProcessClass]]></ActiveXProgramID>
-		<DotNetClass></DotNetClass>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.----Class]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -114,7 +114,7 @@ ul.rssAggregator li p.raDescription {}
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.RssFeedLinkClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssFeedLinkClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Feed=[SelectContentName("RSS Feeds")]]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -167,7 +167,7 @@ ul.rssAggregator li p.raDescription {}
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.RssFeedLinkListClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssFeedLinkListClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -218,7 +218,7 @@ ul.rssAggregator li p.raDescription {}
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.RssFeedProcessClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssFeedProcessClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -262,8 +262,8 @@ ul.rssAggregator li p.raDescription {}
 	<Addon name="RSS Quick Client" guid="{8A869BAB-CE23-4DBC-A714-D39E45B6E647}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID><![CDATA[aoRSSClient.QuickClass]]></ActiveXProgramID>
-		<DotNetClass></DotNetClass>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssClientQuickClass]]></DotNetClass>
 		<ArgumentList><![CDATA[URL=http://rss.cnn.com/rss/cnn_tech.rss
 RefreshHours=1
 Number of Stories=99]]></ArgumentList>
@@ -327,7 +327,7 @@ Number of Stories=99]]></ArgumentList>
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.WebcastClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.WebcastClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Media Link=[]ResourceLink
 Media Size=Medium-320x240[Small-160x120|Medium-320x240|Large-640x480]
 Hide Player=[yes]checkbox
@@ -487,7 +487,7 @@ end function
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.aoRssFeed2.Views.WebcastFooterClass]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.WebcastFooterClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -650,6 +650,7 @@ end function
 		</Field>
 	</CDef>
 	<Resource name="IconXML-25x13.gif" type="www" path="rssFeeds" />
-	<Resource name="aoRSSFeed2.dll" type="executable" path="" />
+	<Resource name="aoRSS.dll" type="executable" path="" />
+	<Resource name="aoRss.dll.config" type="executable" path="" />
 	<Resource name="oiPlayerFiles.zip" type="www" path="" />
 </Collection>

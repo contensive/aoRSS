@@ -3,14 +3,13 @@ Option Strict On
 Option Explicit On
 
 Imports System.Web.ClientServices
-Imports AddonCollectionVb.Controllers
-Imports Contensive.Addons.RssFeed.Controllers
+Imports Contensive.Addons.Rss.Controllers
 Imports Contensive.BaseClasses
 
 
 Namespace Views
     '
-    Public Class QuickClass
+    Public Class RssClientQuickClass
         Inherits AddonBaseClass
         '
         ' - if nuget references are not there, open nuget command line and click the 'reload' message at the top, or run "Update-Package -reinstall" - close/open

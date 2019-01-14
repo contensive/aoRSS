@@ -3,8 +3,8 @@ Option Strict On
 Option Explicit On
 
 Imports System.Web.ClientServices
-Imports AddonCollectionVb.Controllers
-Imports Contensive.Addons.RssFeed.Controllers
+
+Imports Contensive.Addons.Rss.Controllers
 Imports Contensive.BaseClasses
 
 
