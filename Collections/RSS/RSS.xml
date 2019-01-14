@@ -69,7 +69,7 @@ ul.rssAggregator li p.raDescription {}
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.----Class]]></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RefreshProcessClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
