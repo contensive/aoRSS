@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="RSS" guid="{06791870-0EF8-48CB-AC54-2327FF5A1C40}" system="No" updatable="Yes" blockNavigatorNode="No">
+<Collection name="RSS" guid="{06791870-0ef8-48cb-ac54-2327ff5a1c40}" system="No" updatable="Yes" blockNavigatorNode="No">
 	<HelpLink>http://support.contensive.com/rss-feeds</HelpLink>
 	<Help></Help>
 	<Addon name="RSS Aggregator" guid="{1BC315FB-1ACA-4FB2-8615-DAEDBB88B5A0}" type="Add-on">
@@ -40,6 +40,7 @@ Story Count=5]]></ArgumentList>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
+
 ul.rssAggregator { list-style-type: none}
 
 ul.rssAggregator li.raItem {}
@@ -62,7 +63,6 @@ ul.rssAggregator li p.raDescription {}
 
 
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Aggregator Process" guid="{A1635E99-01BB-4393-9555-FD69F2B0C3EE}" type="Add-on">
@@ -102,7 +102,6 @@ ul.rssAggregator li p.raDescription {}
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 		<ProcessTriggers>
 			<ContentChange name="RSS Aggregators" guid="{9BE833BA-40D2-41F6-9088-65B2F254CD8B}"/>
@@ -152,6 +151,7 @@ ul.rssAggregator li p.raDescription {}
 
 
 
+
 .RSSFeedImage {border:0px;vertical-align:middle;}
 .RSSFeedLink .RSSFeedImage {border:0px;}
 .RSSFeedLink {}
@@ -160,7 +160,6 @@ ul.rssAggregator li p.raDescription {}
 .RSSFeedLink A:hover {}
 .RSSFeedLink A .RSSFeedImage {border:0px;}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Link List" guid="{B52F5254-6CF9-4890-A8AC-F2E811B42940}" type="Add-on">
@@ -202,6 +201,7 @@ ul.rssAggregator li p.raDescription {}
 		<Styles><![CDATA[
 
 
+
 .RSSFeedImage {border:0px;vertical-align:middle;}
 .RSSFeedList .RSSFeedImage {border:0px;vertical-align:middle;}
 .RSSFeedList A .RSSFeedImage {border:0px;vertical-align:middle;}
@@ -211,7 +211,6 @@ ul.rssAggregator li p.raDescription {}
 .RSSFeedList .RSSFeedListItem A:visited {}
 .RSSFeedList .RSSFeedListItem A:hover {}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Process" guid="{2119C2DA-1D57-4C32-B13C-28CD2D85EDF5}" type="Add-on">
@@ -251,7 +250,6 @@ ul.rssAggregator li p.raDescription {}
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 		<ProcessTriggers>
 			<ContentChange name="RSS Feeds" guid="{8808CE15-6204-4E2E-B650-3730AAB0F3EF}"/>
@@ -266,7 +264,7 @@ ul.rssAggregator li p.raDescription {}
 		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssClientQuickClass]]></DotNetClass>
 		<ArgumentList><![CDATA[URL=http://rss.cnn.com/rss/cnn_tech.rss
 RefreshHours=1
-Number of Stories=99]]></ArgumentList>
+Number of Stories=5]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
 		<Help></Help>
@@ -320,7 +318,6 @@ Number of Stories=99]]></ArgumentList>
 .ItemEnclosure A:visited{text-decoration:none;color:#404040;}
 .ItemEnclosure A:hover{text-decoration:underline;color:#404040;}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="Webcast Add-on" guid="{F6037DEE-023C-4A14-A972-ADAFA5538240}" type="Add-on">
@@ -459,7 +456,8 @@ function ShowWebcastPopupPlayer( Instance, strMediaFile, numWidth, numHeight) {
   </script>]]></OtherHeadTags>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
-		<Styles><![CDATA[.WebcastContainer{display:table;}
+		<Styles><![CDATA[
+.WebcastContainer{display:table;}
 .WebcastContainer .PlayerContainer {border:1px solid #808080;background-color:#f0f0f0;padding:2px;}
 .WebcastContainer .ToolsContainer {border:1px solid #808080;background-color:#e0e0e0;padding:4px;}
 .WebcastContainer .ToolsContainer A.Show {text-decoration:none;padding:2px;}
@@ -476,7 +474,6 @@ function ShowWebcastPopupPlayer( Instance, strMediaFile, numWidth, numHeight) {
 .WebcastContainer .ToolsContainer A.Download:visited {text-decoration:none;}
 .WebcastContainer .ToolsContainer {font-size:11px}
 ]]></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000">
 			<Code><![CDATA[function m
 end function
@@ -520,7 +517,6 @@ end function
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<styleslinkhref></styleslinkhref>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<CDef Name="Page Content" guid="{02203F58-0921-4F75-A089-0EAD6E8FEB4F}" >
@@ -594,6 +590,14 @@ end function
 			<HelpDefault><![CDATA[Aggregator Sources are RSS Feeds from other sites that will be mixed together in this group (Aggregator). To include any of these sources in this aggregator, check the box next to their name. To add more Aggregator Sources, open the list of sources by opening the navigator to Manage Addons - RSS clients and click on RSS Aggregator Sources.]]></HelpDefault>
 		</Field>
 	</CDef>
+	<CDef Name="RSS Clients" Active="1" AdminOnly="0" AllowAdd="1" AllowCalendarEvents="0" AllowContentChildTool="0" AllowContentTracking="0" AllowDelete="1" AllowMetaContent="" AllowTopicRules="0" AllowWorkflowAuthoring="0" AuthoringDataSourceName="Default" AuthoringTableName="ccRSSClients" ContentDataSourceName="Default" ContentTableName="ccRSSClients" DefaultSortMethod="" DeveloperOnly="0" DropDownFieldList="Name" EditorGroupName="" Parent="" IconLink="" IconHeight="0" IconWidth="0" IconSprites="0" isbasecontent="" guid="{8bb6b058-54da-4009-8554-1b5ff4597c49}" >
+		<Field Name="name" active="True" AdminOnly="False" Authorable="True" Caption="Name" DeveloperOnly="False" EditSortPriority="110" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="active" active="True" AdminOnly="False" Authorable="False" Caption="Active" DeveloperOnly="False" EditSortPriority="200" FieldType="Boolean" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="1" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="sortorder" active="True" AdminOnly="False" Authorable="False" Caption="Alpha Sort Order" DeveloperOnly="False" EditSortPriority="2000" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="url" active="True" AdminOnly="False" Authorable="True" Caption="URL" DeveloperOnly="False" EditSortPriority="1000" FieldType="Link" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="refreshhours" active="True" AdminOnly="False" Authorable="True" Caption="Hours Between Refreshes" DeveloperOnly="False" EditSortPriority="1010" FieldType="Integer" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="1" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="NumberofStories" active="True" AdminOnly="False" Authorable="True" Caption="Number of Stories" DeveloperOnly="False" EditSortPriority="1020" FieldType="Integer" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="5" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+	</CDef>
 	<CDef Name="RSS Feed Blog Rules" Active="1" AdminOnly="1" AllowAdd="1" AllowCalendarEvents="0" AllowContentChildTool="0" AllowContentTracking="0" AllowDelete="1" AllowMetaContent="" AllowTopicRules="0" AllowWorkflowAuthoring="0" AuthoringDataSourceName="Default" AuthoringTableName="ccRSSFeedRules" ContentDataSourceName="Default" ContentTableName="ccRSSFeedRules" DefaultSortMethod="By Name" DeveloperOnly="1" DropDownFieldList="Name" EditorGroupName="" Parent="" IconLink="" IconHeight="0" IconWidth="0" IconSprites="0" isbasecontent="0" guid="{B921F7A7-1EE1-4EC2-A65D-33FD2E310F54}" >
 		<Field Name="name" active="True" AdminOnly="False" Authorable="True" Caption="Name" DeveloperOnly="False" EditSortPriority="110" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="99" IndexWidth="36" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
 		<Field Name="active" active="True" AdminOnly="False" Authorable="True" Caption="Active" DeveloperOnly="False" EditSortPriority="200" FieldType="Boolean" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="1" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
@@ -610,7 +614,7 @@ end function
 		<Field Name="rssfeedid" active="True" AdminOnly="False" Authorable="True" Caption="RSS Feed" DeveloperOnly="False" EditSortPriority="300" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
 			<HelpDefault><![CDATA[When selected, this rule only applies to this RSS Feed.]]></HelpDefault>
 		</Field>
-		<Field Name="newsletterissuepageid" active="True" AdminOnly="False" Authorable="True" Caption="Newsletter Story" DeveloperOnly="False" EditSortPriority="310" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="Newsletter Stories" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
+		<Field Name="newsletterissuepageid" active="True" AdminOnly="False" Authorable="True" Caption="Newsletter Story" DeveloperOnly="False" EditSortPriority="310" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
 			<HelpDefault><![CDATA[When selected, this rule only applies to this Newsletter Story.]]></HelpDefault>
 		</Field>
 	</CDef>
@@ -650,7 +654,7 @@ end function
 		</Field>
 	</CDef>
 	<Resource name="IconXML-25x13.gif" type="www" path="rssFeeds" />
-	<Resource name="aoRSS.dll" type="executable" path="" />
+	<Resource name="oiplayerfiles.zip" type="www" path="" />
+	<Resource name="aoRss.dll" type="executable" path="" />
 	<Resource name="aoRss.dll.config" type="executable" path="" />
-	<Resource name="oiPlayerFiles.zip" type="www" path="" />
 </Collection>

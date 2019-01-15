@@ -89,11 +89,13 @@
     <Compile Include="Models\Db\RSSAggregatorSourcesModel.vb" />
     <Compile Include="Models\Db\RSSAggregatorSourceStorieModel.vb" />
     <Compile Include="Models\Db\RSSFeedModel.vb" />
+    <Compile Include="Models\Db\RSSQuickClientModel.vb" />
     <Compile Include="Models\Domain\BlogEntrieModel.vb" />
     <Compile Include="Models\Domain\baseComplexModel.vb" />
     <Compile Include="Models\Domain\FeedModel.vb" />
     <Compile Include="Models\Domain\FeedContentModel.vb" />
     <Compile Include="Models\Domain\_blankModel.vb" />
+    <Compile Include="Models\View\Request.vb" />
     <Compile Include="Views\AggregatorClass.vb" />
     <Compile Include="Views\IXMLDOMNode.vb" />
     <Compile Include="Views\RssClientQuickClass.vb" />

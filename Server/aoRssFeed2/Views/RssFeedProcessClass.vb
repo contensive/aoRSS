@@ -32,7 +32,7 @@ Namespace Views
                 '
                 ' Load the feeds
                 Dim feedList As New List(Of Models.Domain.FeedModel)
-                For Each dbFeed As RSSFeedModel In BaseModel.createList(Of RSSFeedModel)(CP, "", "")
+                For Each dbFeed As RSSFeedModel In BaseModel.createList(Of RSSFeedModel)(CP, "", "id desc")
                     Dim feed As New Models.Domain.FeedModel With {
                         .Id = dbFeed.id,
                         .Name = dbFeed.name,
@@ -55,6 +55,13 @@ Namespace Views
                     If Pos > 0 Then
                         testFilenameNoExt = Mid(testFilenameNoExt, 1, Pos - 1)
                     End If
+                    '
+                    ' -- 20190114, from VS, removes everything before the first Unix slash
+                    Pos = InStr(1, testFilenameNoExt, "/", vbTextCompare)
+                    If Pos > 0 Then
+                        testFilenameNoExt = Mid(testFilenameNoExt, Pos + 1)
+                    End If
+                    '
                     testFilenameNoExt = testEncodeFilename(testFilenameNoExt)
                     Dim suffixNumber As Integer = 1
                     Dim testFilenameRoot As String = testFilenameNoExt
@@ -174,7 +181,7 @@ Namespace Views
                 ' tbd
                 For Each feed In feedList
 
-                    feed.entryList.Sort(Function(a, b) a.DatePublish.CompareTo(b.DatePublish))
+                    feed.entryList.Sort(Function(a, b) b.DatePublish.CompareTo(a.DatePublish))
                 Next
                 '
                 '

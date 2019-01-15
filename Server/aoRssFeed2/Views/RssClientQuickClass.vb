@@ -4,6 +4,8 @@ Option Explicit On
 
 Imports System.Web.ClientServices
 Imports Contensive.Addons.Rss.Controllers
+Imports Contensive.Addons.Rss.Models.Db
+Imports Contensive.Addons.Rss.Models.View
 Imports Contensive.BaseClasses
 
 
@@ -26,27 +28,35 @@ Namespace Views
                 Dim isAtom As Boolean
                 Dim FeedHeader As String
                 Dim LastRefresh As Date
-                Dim RefreshHours As Double
                 Dim Feed As String = ""
                 Dim FeedConfig As String
                 Dim ConfigHeader As String
                 Dim ConfigSplit() As String
                 Dim doc As Xml.XmlDocument
                 Dim FeedFilename As String = ""
-                Dim Link As String
                 Dim SaveCache As Boolean
-                Dim MaxStories As Long
-                Dim instanceId As String = cp.Doc.GetText("instanceId")
-                SaveCache = False
-                Link = Trim(cp.Doc.GetText("URL"))
-                RefreshHours = cp.Utils.EncodeNumber(cp.Doc.GetText("RefreshHours"))
-                MaxStories = cp.Utils.EncodeInteger(cp.Doc.GetText("Number of Stories"))
-                If MaxStories = 0 Then
-                    MaxStories = 99
+                '
+                Dim request As New RequestModel(cp)
+                Dim rssClient = BaseModel.create(Of RSSClientModel)(cp, request.instanceId)
+                If (rssClient Is Nothing) Then
+                    rssClient = BaseModel.add(Of RSSClientModel)(cp)
+                    rssClient.ccguid = request.instanceId
+                    rssClient.name = "Quick Client created " & Now.ToString()
+                    '
+                    ' -- pickup either the legacy -wrench' values, or the addon's feature arguments
+                    rssClient.url = cp.Doc.GetText("URL").Trim()
+                    If (String.IsNullOrWhiteSpace(rssClient.url)) Then rssClient.url = "http://www.contensive.com/rss/OpenUp.xml"
+                    rssClient.refreshhours = cp.Utils.EncodeInteger(cp.Doc.GetText("RefreshHours"))
+                    If (rssClient.refreshhours = 0) Then rssClient.refreshhours = 1
+                    rssClient.numberOfStories = cp.Utils.EncodeInteger(cp.Doc.GetText("Number of Stories"))
+                    If rssClient.numberOfStories = 0 Then rssClient.numberOfStories = 99
+                    rssClient.save(Of RSSClientModel)(cp)
                 End If
-                If Link <> "" Then
+                '
+                SaveCache = False
+                If rssClient.url <> "" Then
                     SaveCache = True
-                    FeedFilename = encodeFilename(Link)
+                    FeedFilename = encodeFilename(rssClient.url)
                     FeedFilename = "aoRSSClientFiles\" & FeedFilename & ".txt"
                     FeedConfig = cp.File.ReadVirtual(FeedFilename)
                     If Not FeedConfig <> "" Then
@@ -57,7 +67,7 @@ Namespace Views
                                 If True Then
                                     LastRefresh = cp.Utils.EncodeDate(cp.Doc.GetDate(FeedConfig))
                                     If LastRefresh <> CDate("0") Then
-                                        If (LastRefresh.AddHours(RefreshHours) > Now()) Then
+                                        If (LastRefresh.AddHours(rssClient.refreshhours) > Now()) Then
                                             '
                                             ' Use the cached feed
                                             '
@@ -73,7 +83,7 @@ Namespace Views
                         '
                         ' Get a new copy of the feed
                         doc = New Xml.XmlDocument
-                        doc.Load(Link)
+                        doc.Load(rssClient.url)
                         Feed = doc.InnerXml
                         SaveCache = True
                     End If
@@ -89,19 +99,19 @@ Namespace Views
                             ' RSS Feed
                             '
                             IsRSS = True
-                            result = GetRSS(cp, doc.InnerXml, MaxStories)
+                            result = GetRSS(cp, doc.InnerXml, rssClient.numberOfStories)
                         ElseIf (LCase(.Name) = LCase(AtomRootNode)) Then
                             '
                             ' Atom Feed
                             '
                             isAtom = True
-                            result = GetAtom(cp, doc.InnerXml, CType(MaxStories, String))
+                            result = GetAtom(cp, doc.InnerXml, CType(rssClient.numberOfStories, String))
                         Else
                             '
                             ' Bad Feed
                             '
                             If cp.User.IsAdmin Then
-                                result = cp.Html.adminHint("The RSS Feed [" & Link & "] returned an incompatible file.")
+                                result = cp.Html.adminHint("The RSS Feed [" & rssClient.url & "] returned an incompatible file.")
                             End If
                         End If
                     End With
@@ -113,6 +123,10 @@ Namespace Views
                                         & vbCrLf & CStr(Now())
                         Call cp.File.SaveVirtual(FeedFilename, FeedHeader & vbCrLf & Feed)
                     End If
+                End If
+                '
+                If (cp.User.IsEditingAnything()) Then
+                    result = cp.Content.GetEditLink("RSS Clients", rssClient.id.ToString(), False, "RSS Quick Client Settings", cp.User.IsAdmin()) & result
                 End If
             Catch ex As Exception
                 cp.Site.ErrorReport(ex)
