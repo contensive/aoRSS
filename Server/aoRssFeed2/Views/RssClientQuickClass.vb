@@ -6,7 +6,7 @@ Imports System.Web.ClientServices
 Imports Contensive.Addons.Rss.Controllers
 Imports Contensive.BaseClasses
 
-
+'Contensive.Addons.Rss.Views.RssClientQuickClass
 Namespace Views
     '
     Public Class RssClientQuickClass
@@ -294,7 +294,7 @@ Namespace Views
                                                     If ItemLink <> "" Then
                                                         ItemTitle = "<a href=""" & ItemLink & """ target=_blank>" & ItemTitle & "</a>"
                                                     End If
-                                                    ItemTitle = vbCrLf & vbTab & vbTab & "<div class=ItemTitle>" & ItemTitle & "</div>"
+                                                    ItemTitle = vbCrLf & vbTab & vbTab & "<h3>" & ItemTitle & "</h3>"
                                                 End If
                                                 If ItemDescription <> "" Then
                                                     ItemDescription = vbCrLf & vbTab & vbTab & "<div class=ItemDescription>" & ItemDescription & "</div>"
@@ -337,7 +337,7 @@ Namespace Views
                                         ChannelDescription = ChannelImage & ChannelDescription
                                     End If
                                     GetRSS = "" _
-                                            & vbCrLf & vbTab & "<div class=ChannelTitle>" & ChannelTitle & "</div>" _
+                                            & vbCrLf & vbTab & "<h2>" & ChannelTitle & "</h2>" _
                                             & vbCrLf & vbTab & "<div class=ChannelPubdate>" & ChannelPubDate & "</div>" _
                                             & vbCrLf & vbTab & "<div class=ChannelDescription>" & ChannelDescription & "</div>" _
                                             & GetRSS
