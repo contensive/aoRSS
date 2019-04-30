@@ -317,7 +317,7 @@ Namespace Views
                                                     End If
                                                 End If
                                                 GetRSS = GetRSS _
-                                                        & vbCrLf & vbTab & "<div class=ChannelItem>" _
+                                                        & vbCrLf & vbTab & "<div class=ChannelItem><hr>" _
                                                         & ItemTitle _
                                                         & ItemPubDate _
                                                         & ItemDescription _
