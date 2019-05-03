@@ -32,23 +32,22 @@ Namespace Views
                 '
                 ' Load the feeds
                 Dim feedList As New List(Of Models.Domain.FeedModel)
-                For Each dbFeed As RSSFeedModel In BaseModel.createList(Of RSSFeedModel)(CP, "", "id desc")
-                    Dim feed As New Models.Domain.FeedModel With {
-                        .Id = dbFeed.id,
-                        .Name = dbFeed.name,
-                        .Description = dbFeed.Description,
-                        .Link = dbFeed.Link,
-                        .LogoFilename = dbFeed.LogoFilename,
+                For Each feed As RSSFeedModel In BaseModel.createList(Of RSSFeedModel)(CP, "", "id desc")
+                    Dim rssFeed As New Models.Domain.FeedModel With {
+                        .Id = feed.id,
+                        .Name = feed.name,
+                        .Description = feed.Description,
+                        .Link = feed.Link,
+                        .LogoFilename = feed.LogoFilename,
                         .entryList = New List(Of Models.Domain.FeedEntryModel)
                     }
-                    If String.IsNullOrWhiteSpace(feed.Link) Then feed.Link = "http://" & DomainName & CP.Site.AppRootPath
-                    Dim RSSFilename As String = dbFeed.RSSFilename
-                    Dim testfilename As String = RSSFilename
+                    If String.IsNullOrWhiteSpace(rssFeed.Link) Then rssFeed.Link = "http://" & DomainName & CP.Site.AppRootPath
+                    Dim testfilename As String = feed.RSSFilename
                     If testfilename = "" Then
-                        testfilename = dbFeed.name
+                        testfilename = feed.name
                     End If
                     If testfilename = "" Then
-                        testfilename = "RSSFeed" & dbFeed.id
+                        testfilename = "RSSFeed" & feed.id
                     End If
                     Dim testFilenameNoExt As String = testfilename
                     Pos = InStr(1, testFilenameNoExt, ".xml", vbTextCompare)
@@ -72,14 +71,11 @@ Namespace Views
                     Loop
                     usedFilenames = usedFilenames & "," & testFilenameNoExt
                     testfilename = "rssfeeds/" & testFilenameNoExt & ".xml"
-                    If testfilename <> RSSFilename Then
-                        RSSFilename = testfilename
-                        dbFeed.RSSFilename = RSSFilename
-                    End If
-                    feed.RSSFilename = RSSFilename
-                    feedList.Add(feed)
-                    dbFeed.RSSDateUpdated = RightNow
-                    dbFeed.save(Of RSSFeedModel)(CP)
+                    feed.RSSFilename = testfilename
+                    rssFeed.RSSFilename = testfilename
+                    feedList.Add(rssFeed)
+                    feed.RSSDateUpdated = RightNow
+                    feed.save(Of RSSFeedModel)(CP)
                 Next
                 '
                 ' -- create a list of all RSSFeeds content fields - these are the many-to-many fields that point to story records for each feed

@@ -3,17 +3,20 @@ script to create vb model data -- model data follows the script
 
 
 function m
-	dim cs,c,n
+	dim cs,c,modelName
 	set cs = cp.csNew()
 	if ( cs.open( "content" )) then
 		do
-			n = replace( cs.getText( "name" ), " ", "")
-			if ( right( n,1 ) = "s" ) then
-				n = left( n, len( n )-1)
+			modelName = replace( cs.getText( "name" ), " ", "")
+			modelName = replace( modelName, "-", "")
+			if ( right( modelName,1 ) = "s" ) then
+				modelName = left( modelName, len( modelName )-1)
 			end if
-			n = n & "Model"
+			modelName = modelName & "Model"
 			c = c & vbcrlf & vbcrlf & "---------------------------------------------"
-			c = c & vbcrlf & n
+			c = c & vbcrlf & "Model Name: " & modelName
+			c = c & vbcrlf & "Content Name: " & cs.getText( "name" )
+			c = c & vbcrlf & "Table Name: " & cp.content.getRecordName( "tables", cs.getInteger( "ContentTableID" ))
 			c = c & vbcrlf & getModelFields( cs.getInteger( "id" ))
 			cs.goNext()
 		loop while cs.ok
@@ -32,7 +35,7 @@ function getModelFields( contentId )
 		select case lcase( fieldName )
 			case "id"
 				p = p & ""
-			case "contentcontrolid","modifiedby","createdby","createkey","editarchive","editsourceid","editblank"
+			case "contentcategoryid","contentcontrolid","modifiedby","createdby","createkey","editarchive","editsourceid","editblank"
 				p = p & ""
 			case "modifieddate","dateadded"
 				p = p & ""
@@ -65,3 +68,4 @@ function getModelFields( contentId )
 	cs.close()
 	getModelFields = p & vbcrlf & l & vbcrlf & s & vbcrlf & d
 end function
+

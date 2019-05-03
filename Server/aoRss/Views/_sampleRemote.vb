@@ -9,7 +9,7 @@ Imports Contensive.BaseClasses
 '
 Namespace Views
     '
-    Public Class getProjectListNoDetailsClass
+    Public Class GetProjectListNoDetailsClass
         Inherits AddonBaseClass
         '
         '=====================================================================================

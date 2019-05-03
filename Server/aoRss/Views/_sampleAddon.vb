@@ -8,7 +8,7 @@ Imports Contensive.BaseClasses
 
 Namespace Views
     '
-    Public Class addonClass
+    Public Class AddonClass
         Inherits AddonBaseClass
         '
         ' - if nuget references are not there, open nuget command line and click the 'reload' message at the top, or run "Update-Package -reinstall" - close/open
