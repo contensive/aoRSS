@@ -290,26 +290,14 @@ Number of Stories=5]]></ArgumentList>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
-
-.ChannelItem {clear:both}
-.ChannelTitle{margin: 10px 0 5px 0;font-size:120%;font-weight:bold;}
-.ChannelTitle A {text-decoration:none! important;color:black! important;}
 .ChannelDescription{padding-top:10px}
 .ChannelImage {margin-top:10px;margin-bottom:10px;margin-right:10px;}
-.ChannelItem{margin: 10px 0 0 10px;clear:both;border-top:1px dashed #808080;}
-.ItemTitle{margin: 10px 0 0 0;font-size:120%;font-weight:bold;}
-.ItemTitle A{text-decoration:none;color:black;}
-.ItemTitle A:link{text-decoration:none;color:black;}
-.ItemTitle A:visited{text-decoration:none;color:black;}
-.ItemTitle A:hover{text-decoration:underline;color:black;}
+.ChannelItem{margin: 10px 0 0 10px;clear:both}
 .ItemPubDate {margin: 5px 0 0 0;}
 .ItemDescription{margin: 5px 0 0 0;}
 .ItemEnclosureRow {margin: 5px 0 0 0;}
 .ItemEnclosure {margin: 0 0 10px 0;float:left}
-.ItemEnclosure A{text-decoration:none;color:#404040;}
-.ItemEnclosure A:link{text-decoration:none;color:#404040;}
-.ItemEnclosure A:visited{text-decoration:none;color:#404040;}
-.ItemEnclosure A:hover{text-decoration:underline;color:#404040;}
+.ItemEnclosure A,.ItemEnclosure A:link,.ItemEnclosure A:visited,.ItemEnclosure A:hover{text-decoration:underline;color:#404040;}		
 ]]></Styles>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>

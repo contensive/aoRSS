@@ -331,7 +331,7 @@ Namespace Views
                                                     End If
                                                 End If
                                                 GetRSS = GetRSS _
-                                                        & vbCrLf & vbTab & "<div class=ChannelItem><hr>" _
+                                                        & vbCrLf & vbTab & "<hr style=""clear:both""><div class=ChannelItem>" _
                                                         & ItemTitle _
                                                         & ItemPubDate _
                                                         & ItemDescription _
