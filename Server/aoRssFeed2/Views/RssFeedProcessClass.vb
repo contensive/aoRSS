@@ -38,7 +38,7 @@ Namespace Views
                         .Name = dbFeed.name,
                         .Description = dbFeed.Description,
                         .Link = dbFeed.Link,
-                        .LogoFilename = dbFeed.Link,
+                        .LogoFilename = dbFeed.LogoFilename,
                         .entryList = New List(Of Models.Domain.FeedEntryModel)
                     }
                     If String.IsNullOrWhiteSpace(feed.Link) Then feed.Link = "http://" & DomainName & CP.Site.AppRootPath
@@ -55,6 +55,13 @@ Namespace Views
                     If Pos > 0 Then
                         testFilenameNoExt = Mid(testFilenameNoExt, 1, Pos - 1)
                     End If
+                    '
+                    ' -- 20190114, from VS, removes everything before the first Unix slash
+                    Pos = InStr(1, testFilenameNoExt, "/", vbTextCompare)
+                    If Pos > 0 Then
+                        testFilenameNoExt = Mid(testFilenameNoExt, Pos + 1)
+                    End If
+                    '
                     testFilenameNoExt = testEncodeFilename(testFilenameNoExt)
                     Dim suffixNumber As Integer = 1
                     Dim testFilenameRoot As String = testFilenameNoExt
@@ -212,9 +219,9 @@ Namespace Views
                         ' <atom:link href="http://dallas.example.com/rss.xml" rel="self" type="application/rss+xml" />
                         '
                         Node = Doc.CreateElement("atom:link")
-                        Call Node.Attributes.GetNamedItem("href", "http://" & DomainName & CP.Site.AppRootPath & CP.Site.FilePath & .RSSFilename)
-                        Call Node.Attributes.GetNamedItem("rel", "self")
-                        Call Node.Attributes.GetNamedItem("type", "application/rss+xml")
+                        Call Node.Attributes.Append(Doc.CreateAttribute("href", "http://" & DomainName & CP.Site.AppRootPath & CP.Site.FilePath & .RSSFilename))
+                        Call Node.Attributes.Append(Doc.CreateAttribute("rel", "self"))
+                        Call Node.Attributes.Append(Doc.CreateAttribute("type", "application/rss+xml"))
                         Call ChannelNode.AppendChild(Node)
                         '
                         If .Link <> "" Then
