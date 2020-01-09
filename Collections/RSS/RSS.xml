@@ -27,6 +27,7 @@ Story Count=5]]></ArgumentList>
 		<Template>Yes</Template>
 		<Email>No</Email>
 		<Admin>No</Admin>
+		<Category>Extras.Feeds/Lists</Category>
 		<OnPageEndEvent>No</OnPageEndEvent>
 		<OnPageStartEvent>No</OnPageStartEvent>
 		<OnBodyStart>No</OnBodyStart>
@@ -131,6 +132,7 @@ ul.rssAggregator li p.raDescription {}
 		<Template>Yes</Template>
 		<Email>No</Email>
 		<Admin>No</Admin>
+		<Category>Extras.Feeds/Lists</Category>
 		<OnPageEndEvent>No</OnPageEndEvent>
 		<OnPageStartEvent>No</OnPageStartEvent>
 		<OnBodyStart>No</OnBodyStart>
@@ -183,6 +185,7 @@ ul.rssAggregator li p.raDescription {}
 		<Template>Yes</Template>
 		<Email>No</Email>
 		<Admin>No</Admin>
+		<Category>Extras.Feeds/Lists</Category>
 		<OnPageEndEvent>No</OnPageEndEvent>
 		<OnPageStartEvent>No</OnPageStartEvent>
 		<OnBodyStart>No</OnBodyStart>
@@ -278,6 +281,7 @@ Number of Stories=5]]></ArgumentList>
 		<Template>Yes</Template>
 		<Email>No</Email>
 		<Admin>No</Admin>
+		<Category>Extras.Feeds/Lists</Category>
 		<OnPageEndEvent>No</OnPageEndEvent>
 		<OnPageStartEvent>No</OnPageStartEvent>
 		<OnBodyStart>No</OnBodyStart>
