@@ -7,7 +7,7 @@
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.AggregatorClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Aggregator=[List(RSS Aggregators)]
-Story Count=5]]></ArgumentList>
+			Story Count=5]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
 		<Help></Help>
@@ -40,29 +40,15 @@ Story Count=5]]></ArgumentList>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
-
-ul.rssAggregator { list-style-type: none}
-
-ul.rssAggregator li.raItem {}
-
-ul.rssAggregator li h2.raCaption {}
-
-ul.rssAggregator li div.raByLine { color: #444; margin: 5px 0 5px 0;}
-
-ul.rssAggregator li div.raByLine .raSourceName {}
-
-ul.rssAggregator li div.raByLine .raDelimiter { padding: 0 10px 0 10px; }
-
-ul.rssAggregator li div.raByLine .raPubDate {}
-
-ul.rssAggregator li p.raDescription {}
-
-
-
-
-
-
-]]></Styles>
+			ul.rssAggregator { list-style-type: none}
+			ul.rssAggregator li.raItem {}
+			ul.rssAggregator li h2.raCaption {}
+			ul.rssAggregator li div.raByLine { color: #444; margin: 5px 0 5px 0;}
+			ul.rssAggregator li div.raByLine .raSourceName {}
+			ul.rssAggregator li div.raByLine .raDelimiter { padding: 0 10px 0 10px; }
+			ul.rssAggregator li div.raByLine .raPubDate {}
+			ul.rssAggregator li p.raDescription {}
+			]]></Styles>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Aggregator Process" guid="{A1635E99-01BB-4393-9555-FD69F2B0C3EE}" type="Add-on">
@@ -145,20 +131,14 @@ ul.rssAggregator li p.raDescription {}
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
-
-
-
-
-
-
-.RSSFeedImage {border:0px;vertical-align:middle;}
-.RSSFeedLink .RSSFeedImage {border:0px;}
-.RSSFeedLink {}
-.RSSFeedLink A {}
-.RSSFeedLink A:visited {}
-.RSSFeedLink A:hover {}
-.RSSFeedLink A .RSSFeedImage {border:0px;}
-]]></Styles>
+			.RSSFeedImage {border:0px;vertical-align:middle;}
+			.RSSFeedLink .RSSFeedImage {border:0px;}
+			.RSSFeedLink {}
+			.RSSFeedLink A {}
+			.RSSFeedLink A:visited {}
+			.RSSFeedLink A:hover {}
+			.RSSFeedLink A .RSSFeedImage {border:0px;}
+			]]></Styles>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Link List" guid="{B52F5254-6CF9-4890-A8AC-F2E811B42940}" type="Add-on">
@@ -198,18 +178,15 @@ ul.rssAggregator li p.raDescription {}
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
-
-
-
-.RSSFeedImage {border:0px;vertical-align:middle;}
-.RSSFeedList .RSSFeedImage {border:0px;vertical-align:middle;}
-.RSSFeedList A .RSSFeedImage {border:0px;vertical-align:middle;}
-.RSSFeedList {list-style:none;margin:0px;}
-.RSSFeedList .RSSFeedListItem {margin-top:10px;}
-.RSSFeedList .RSSFeedListItem A {}
-.RSSFeedList .RSSFeedListItem A:visited {}
-.RSSFeedList .RSSFeedListItem A:hover {}
-]]></Styles>
+			.RSSFeedImage {border:0px;vertical-align:middle;}
+			.RSSFeedList .RSSFeedImage {border:0px;vertical-align:middle;}
+			.RSSFeedList A .RSSFeedImage {border:0px;vertical-align:middle;}
+			.RSSFeedList {list-style:none;margin:0px;}
+			.RSSFeedList .RSSFeedListItem {margin-top:10px;}
+			.RSSFeedList .RSSFeedListItem A {}
+			.RSSFeedList .RSSFeedListItem A:visited {}
+			.RSSFeedList .RSSFeedListItem A:hover {}
+			]]></Styles>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Process" guid="{2119C2DA-1D57-4C32-B13C-28CD2D85EDF5}" type="Add-on">
@@ -260,8 +237,8 @@ ul.rssAggregator li p.raDescription {}
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.Rss.Views.RssClientQuickClass]]></DotNetClass>
 		<ArgumentList><![CDATA[URL=http://rss.cnn.com/rss/cnn_tech.rss
-RefreshHours=1
-Number of Stories=5]]></ArgumentList>
+			RefreshHours=1
+			Number of Stories=5]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
 		<Help></Help>
@@ -294,15 +271,15 @@ Number of Stories=5]]></ArgumentList>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
-.ChannelDescription{padding-top:10px}
-.ChannelImage {margin-top:10px;margin-bottom:10px;margin-right:10px;}
-.ChannelItem{margin: 10px 0 0 10px;clear:both}
-.ItemPubDate {margin: 5px 0 0 0;}
-.ItemDescription{margin: 5px 0 0 0;}
-.ItemEnclosureRow {margin: 5px 0 0 0;}
-.ItemEnclosure {margin: 0 0 10px 0;float:left}
-.ItemEnclosure A,.ItemEnclosure A:link,.ItemEnclosure A:visited,.ItemEnclosure A:hover{text-decoration:underline;color:#404040;}		
-]]></Styles>
+			.ChannelDescription{padding-top:10px}
+			.ChannelImage {margin-top:10px;margin-bottom:10px;margin-right:10px;}
+			.ChannelItem{margin: 10px 0 0 10px;clear:both}
+			.ItemPubDate {margin: 5px 0 0 0;}
+			.ItemDescription{margin: 5px 0 0 0;}
+			.ItemEnclosureRow {margin: 5px 0 0 0;}
+			.ItemEnclosure {margin: 0 0 10px 0;float:left}
+			.ItemEnclosure A,.ItemEnclosure A:link,.ItemEnclosure A:visited,.ItemEnclosure A:hover{text-decoration:underline;color:#404040;}		
+			]]></Styles>
 		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<CDef Name="Page Content" guid="{02203F58-0921-4F75-A089-0EAD6E8FEB4F}" >
