@@ -380,7 +380,7 @@ Namespace Models.Db
                                                 If (String.IsNullOrEmpty(filename)) Then
                                                     filename = getUploadPath(Of T)(instanceProperty.Name.ToLower())
                                                 End If
-                                                cs.SetFile(instanceProperty.Name, content, contentName)
+                                                cs.SetField(instanceProperty.Name, content)
                                             End If
                                         End If
 

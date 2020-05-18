@@ -2,6 +2,7 @@
 Option Explicit On
 Option Strict On
 
+Imports System.Security.Policy
 Imports Contensive.BaseClasses
 
 Namespace Controllers
@@ -166,7 +167,33 @@ Namespace Controllers
                 Return "<img src=""/rssFeeds/IconXML-25x13.gif"" width=25 height=13 border=0 class=""RSSFeedImage"">&nbsp;<a class=""RSSFeedLink"" href=""" & cp.Site.FilePath & rssfeed.RSSFilename & """>" & rssfeed.name & "</a>"
             End If
         End Function
+        '
+        '====================================================================================================
+        ''' <summary>
+        ''' tmp Placeholder for CP.Http.CdnFilePathPrefixAbsolute
+        ''' </summary>
+        ''' <param name="cp"></param>
+        ''' <returns></returns>
+        Public Shared Function getCdnFilePathPrefixAbsolute(cp As CPBaseClass) As String
 
+            If (Not cp.ServerConfig.isLocalFileSystem) Then
+                '
+                ' -- remote file system, return cdnfileurl
+                Return cp.GetAppConfig().cdnFileUrl
+            Else
+                '
+                ' -- local file system
+                Dim cdnFilePathPrefixAbsolute As String = cp.Site.GetText("CdnFilePathPrefixAbsolute").Replace("\", "/")
+                If (Not String.IsNullOrWhiteSpace(cdnFilePathPrefixAbsolute)) Then
+                    If (Not cdnFilePathPrefixAbsolute.Substring(cdnFilePathPrefixAbsolute.Length, 1).Equals("/")) Then
+                        cdnFilePathPrefixAbsolute &= "/"
+                    End If
+                Else
+                    cdnFilePathPrefixAbsolute = "https://" & cp.Site.DomainPrimary & "/" & cp.GetAppConfig().cdnFileUrl
+                End If
+                Return cdnFilePathPrefixAbsolute
+            End If
+        End Function
 
     End Class
 End Namespace

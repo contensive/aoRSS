@@ -4,6 +4,7 @@ Option Explicit On
 
 Imports Contensive.BaseClasses
 Imports Contensive.Addons.Rss.Models.Db
+Imports Contensive.Addons.Rss.Controllers
 
 Namespace Views
     '
@@ -215,7 +216,7 @@ Namespace Views
                         ' <atom:link href="http://dallas.example.com/rss.xml" rel="self" type="application/rss+xml" />
                         '
                         Node = Doc.CreateElement("atom:link")
-                        Call Node.Attributes.Append(Doc.CreateAttribute("href", "http://" & DomainName & CP.Site.AppRootPath & CP.Site.FilePath & .RSSFilename))
+                        Call Node.Attributes.Append(Doc.CreateAttribute("href", genericController.getCdnFilePathPrefixAbsolute(CP) & .RSSFilename))
                         Call Node.Attributes.Append(Doc.CreateAttribute("rel", "self"))
                         Call Node.Attributes.Append(Doc.CreateAttribute("type", "application/rss+xml"))
                         Call ChannelNode.AppendChild(Node)
