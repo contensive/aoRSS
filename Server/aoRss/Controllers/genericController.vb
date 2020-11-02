@@ -183,7 +183,7 @@ Namespace Controllers
             Else
                 '
                 ' -- local file system
-                Dim cdnFilePathPrefixAbsolute As String = cp.Site.GetText("CdnFilePathPrefixAbsolute").Replace("\", "/")
+                Dim cdnFilePathPrefixAbsolute As String = cp.Site.GetText("CdnFilePathPrefixAbsolute")?.Replace("\", "/")
                 If (Not String.IsNullOrWhiteSpace(cdnFilePathPrefixAbsolute)) Then
                     If (Not cdnFilePathPrefixAbsolute.Substring(cdnFilePathPrefixAbsolute.Length, 1).Equals("/")) Then
                         cdnFilePathPrefixAbsolute &= "/"
