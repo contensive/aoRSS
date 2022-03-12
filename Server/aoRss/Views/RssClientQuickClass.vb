@@ -1,14 +1,8 @@
-
-Option Strict On
-Option Explicit On
-
-Imports System.Web.ClientServices
-Imports Contensive.Addons.Rss.Controllers
+Imports System.IO
 Imports Contensive.Addons.Rss.Models.Db
 Imports Contensive.Addons.Rss.Models.View
 Imports Contensive.BaseClasses
 
-'Contensive.Addons.Rss.Views.RssClientQuickClass
 Namespace Views
     '
     Public Class RssClientQuickClass
@@ -18,120 +12,131 @@ Namespace Views
         Const AtomRootNode = "feed"
 
         Public Overrides Function Execute(CP As CPBaseClass) As Object
-            Return GetContent(CP)
-        End Function
-        '
-        Public Function GetContent(cp As CPBaseClass) As String
-            Dim result As String = ""
+            Dim hint As Integer = 10
             Try
-                Dim IsRSS As Boolean
-                Dim isAtom As Boolean
-                Dim FeedHeader As String
-                Dim LastRefresh As Date
-                Dim Feed As String = ""
-                Dim FeedConfig As String
-                Dim ConfigHeader As String
-                Dim ConfigSplit() As String
-                Dim doc As Xml.XmlDocument
-                Dim FeedFilename As String = ""
-                Dim SaveCache As Boolean
+                Dim request As New RequestModel(CP)
+                If (String.IsNullOrEmpty(request.instanceId)) Then
+                    CP.Site.ErrorReport("RSSQuickClient the instanceId is empty")
+                    Return ""
+                End If
                 '
-                Dim request As New RequestModel(cp)
-                Dim rssClient = BaseModel.create(Of RSSClientModel)(cp, request.instanceId)
+                Dim rssClient = BaseModel.create(Of RSSClientModel)(CP, request.instanceId)
                 If (rssClient Is Nothing) Then
-                    rssClient = BaseModel.add(Of RSSClientModel)(cp)
+                    '
+                    ' -- create default record
+                    rssClient = BaseModel.add(Of RSSClientModel)(CP)
                     rssClient.ccguid = request.instanceId
                     rssClient.name = "Quick Client created " & Now.ToString()
                     '
                     ' -- pickup either the legacy -wrench' values, or the addon's feature arguments
-                    rssClient.url = cp.Doc.GetText("URL").Trim()
+                    rssClient.url = CP.Doc.GetText("URL").Trim()
                     If (String.IsNullOrWhiteSpace(rssClient.url)) Then rssClient.url = "http://www.contensive.com/rss/OpenUp.xml"
-                    rssClient.refreshhours = cp.Utils.EncodeInteger(cp.Doc.GetText("RefreshHours"))
+                    rssClient.refreshhours = CP.Utils.EncodeInteger(CP.Doc.GetText("RefreshHours"))
                     If (rssClient.refreshhours = 0) Then rssClient.refreshhours = 1
-                    rssClient.numberOfStories = cp.Utils.EncodeInteger(cp.Doc.GetText("Number of Stories"))
+                    rssClient.numberOfStories = CP.Utils.EncodeInteger(CP.Doc.GetText("Number of Stories"))
                     If rssClient.numberOfStories = 0 Then rssClient.numberOfStories = 99
-                    rssClient.save(Of RSSClientModel)(cp)
+                    rssClient.save(Of RSSClientModel)(CP)
+                End If
+                hint = 20
+                If String.IsNullOrWhiteSpace(rssClient.url) Then
+                    Return ""
                 End If
                 '
-                SaveCache = False
-                If rssClient.url <> "" Then
-                    SaveCache = True
-                    FeedFilename = encodeFilename(rssClient.url)
-                    FeedFilename = "aoRSSClientFiles\" & FeedFilename & ".txt"
-                    FeedConfig = cp.File.ReadVirtual(FeedFilename)
-                    If Not FeedConfig <> "" Then
-                        ConfigHeader = cp.Doc.GetText(FeedConfig)
-                        If ConfigHeader <> "" Then
-                            ConfigSplit = Split(ConfigHeader, ":")
-                            If Trim(LCase(ConfigSplit(0))) = "rss client quick reader" Then
-                                If True Then
-                                    LastRefresh = cp.Utils.EncodeDate(cp.Doc.GetDate(FeedConfig))
-                                    If LastRefresh <> CDate("0") Then
-                                        If (LastRefresh.AddHours(rssClient.refreshhours) > Now()) Then
-                                            '
-                                            ' Use the cached feed
-                                            '
-                                            Feed = FeedConfig
-                                            SaveCache = False
-                                        End If
+                Dim SaveCache As Boolean = True
+                Dim feedContent As String = ""
+                Dim feedCacheFilename As String = encodeFilename(rssClient.url)
+                feedCacheFilename = "aoRSSClientFiles\" & "" & ".txt"
+                Dim feedCache As String = CP.CdnFiles.Read(feedCacheFilename)
+                If String.IsNullOrEmpty(feedCache) Then
+                    hint = 30
+                    '
+                    ' -- feed cache has content, check if valid
+                    Using cacheReader = New StringReader(feedCache)
+                        hint = 31
+                        Dim cacheLine1 As String = cacheReader.ReadLine()
+                        If (Not String.IsNullOrEmpty(cacheLine1)) Then
+                            If Trim(cacheLine1.ToLowerInvariant()) = "rss client quick reader" Then
+                                Dim cacheLastRefresh As Date = CP.Utils.EncodeDate(cacheReader.ReadLine())
+                                If cacheLastRefresh > Date.MinValue Then
+                                    If (cacheLastRefresh.AddHours(rssClient.refreshhours) > Now()) Then
+                                        '
+                                        ' Use the cached feed
+                                        '
+                                        feedContent = cacheReader.ReadToEnd()
+                                        SaveCache = False
                                     End If
                                 End If
                             End If
                         End If
-                    End If
-                    If Feed = "" Then
-                        '
-                        ' Get a new copy of the feed
-                        doc = New Xml.XmlDocument
-                        doc.Load(rssClient.url)
-                        Feed = doc.InnerXml
-                        SaveCache = True
-                    End If
+                    End Using
                 End If
-
-                If Feed <> "" Then
-                    doc = New Xml.XmlDocument
-                    doc.LoadXml(Feed)
+                hint = 40
+                If String.IsNullOrEmpty(feedContent) Then
+                    Try
+                        '
+                        ' Get a new copy of the feed (hack the & out until we find out why its there)
+                        Dim doc As New Xml.XmlDocument
+                        doc.Load(rssClient.url.Replace("&", "%26"))
+                        feedContent = doc.InnerXml
+                        SaveCache = True
+                    Catch ex As Exception
+                        CP.Site.ErrorReport(ex, "Exception during fetch, rssClient.url [" & rssClient.url & "]")
+                        Throw
+                    End Try
+                End If
+                hint = 50
+                Dim result As String = ""
+                If Not String.IsNullOrEmpty(feedContent) Then
+                    hint = 60
+                    Dim doc As New Xml.XmlDocument
+                    doc.LoadXml(feedContent)
                     With doc.DocumentElement
                         '
                         If (LCase(.Name) = LCase(RSSRootNode)) Then
                             '
                             ' RSS Feed
                             '
-                            IsRSS = True
-                            result = GetRSS(cp, doc.InnerXml, rssClient.numberOfStories)
+                            Dim IsRSS As Boolean = True
+                            result = GetRSS(CP, doc.InnerXml, rssClient.numberOfStories)
                         ElseIf (LCase(.Name) = LCase(AtomRootNode)) Then
                             '
                             ' Atom Feed
                             '
-                            isAtom = True
-                            result = GetAtom(cp, doc.InnerXml, CType(rssClient.numberOfStories, String))
+                            Dim isAtom As Boolean = True
+                            result = GetAtom(CP, doc.InnerXml, CType(rssClient.numberOfStories, String))
                         Else
                             '
                             ' Bad Feed
                             '
-                            If cp.User.IsAdmin Then
-                                result = cp.Html.adminHint("The RSS Feed [" & rssClient.url & "] returned an incompatible file.")
+                            SaveCache = False
+                            If CP.User.IsAdmin Then
+                                result = CP.Html.adminHint("The RSS Feed [" & rssClient.url & "] returned an incompatible file.")
                             End If
                         End If
                     End With
+                    hint = 70
                     '
                     ' Save this feed into the cache
                     '
                     If SaveCache Then
-                        FeedHeader = "RSS Client Quick Reader : " _
-                                        & vbCrLf & CStr(Now())
-                        Call cp.File.SaveVirtual(FeedFilename, FeedHeader & vbCrLf & Feed)
+                        Dim FeedHeader As String = "RSS Client Quick Reader" & vbCrLf & CStr(Now())
+                        Call CP.CdnFiles.Save(feedCacheFilename, FeedHeader & vbCrLf & feedContent)
                     End If
+                    hint = 80
                 End If
+                hint = 90
                 '
-                If (cp.User.IsEditingAnything()) Then
-                    result = cp.Content.GetEditLink("RSS Clients", rssClient.id.ToString(), False, "RSS Quick Client Settings", cp.User.IsAdmin()) & result
+                If (CP.User.IsEditingAnything()) Then
+                    result = CP.Content.GetEditLink("RSS Clients", rssClient.id.ToString(), False, "RSS Quick Client Settings", CP.User.IsAdmin()) & result
                 End If
+                Return result
             Catch ex As Exception
-                cp.Site.ErrorReport(ex)
+                CP.Site.ErrorReport(ex, "hint [" & hint & "]")
+                Throw
             End Try
-            Return result
+        End Function
+        '
+        Public Function GetContent(cp As CPBaseClass) As String
         End Function
 
         Private Sub Link(providers As Object)

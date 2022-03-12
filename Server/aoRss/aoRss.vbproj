@@ -150,7 +150,7 @@
     <None Include="rss.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\genericController.vb" />
+    <Compile Include="Controllers\GenericController.vb" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Db\_blankModel.vb" />

@@ -26,7 +26,7 @@ Namespace Views
                 Else
                     Dim liList As String = ""
                     For Each rssfeed As Models.Db.RSSFeedModel In rssfeedList
-                        liList += CP.Html.li(genericController.getFeedLink(CP, rssfeed), "", "RSSFeedListItem")
+                        liList += CP.Html.li(GenericController.getFeedLink(CP, rssfeed), "", "RSSFeedListItem")
                     Next
                     result = CP.Html.ul(liList, "", "RSSFeedList")
                     result = CP.Html.div(result, "", "RSSFeedWrapper")

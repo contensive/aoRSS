@@ -1,12 +1,8 @@
 ﻿
-Option Explicit On
-Option Strict On
-
-Imports System.Security.Policy
 Imports Contensive.BaseClasses
 
 Namespace Controllers
-    Public NotInheritable Class genericController
+    Public NotInheritable Class GenericController
         Private Sub New()
         End Sub
         '
