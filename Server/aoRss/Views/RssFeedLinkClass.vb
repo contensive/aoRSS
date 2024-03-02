@@ -33,7 +33,7 @@ Namespace Views
                 If String.IsNullOrWhiteSpace(rssName) Then
                     Dim rssfeedList As List(Of RSSFeedModel) = BaseModel.createList(Of RSSFeedModel)(CP, "name=" & CP.Db.EncodeSQLText(rssName), "")
                     If (rssfeedList.Count > 0) Then
-                        Return CP.Html.div(genericController.getFeedLink(CP, rssfeedList.First), "", "RSSFeedWrapper")
+                        Return CP.Html.div(GenericController.getFeedLink(CP, rssfeedList.First), "", "RSSFeedWrapper")
                     End If
                 End If
             Catch ex As Exception
