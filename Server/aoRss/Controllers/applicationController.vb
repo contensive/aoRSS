@@ -1,7 +1,4 @@
 ﻿
-Option Explicit On
-Option Strict On
-
 Imports Contensive.BaseClasses
 
 Namespace Controllers

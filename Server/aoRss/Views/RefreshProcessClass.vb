@@ -1,6 +1,6 @@
 
-Option Strict On
-Option Explicit On
+
+
 
 Imports System.Linq
 Imports Contensive.Addons.Rss

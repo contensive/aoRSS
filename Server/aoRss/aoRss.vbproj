@@ -153,13 +153,9 @@
     <Compile Include="Controllers\GenericController.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Db\_blankModel.vb" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Db\baseModel.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\Db\modelData.txt" />
     <Content Include="Resources\LegacyVb6-ccCommonModule.txt" />
     <Content Include="Resources\LegacyVb6-KmaCommonModule.txt" />
     <Content Include="Resources\sampleSql.txt" />

@@ -1,6 +1,6 @@
 
-Option Strict On
-Option Explicit On
+
+
 
 Imports Contensive.Addons.Rss
 Imports Contensive.Addons.Rss.Controllers

@@ -1,6 +1,6 @@
 ﻿
-Option Explicit On
-Option Strict On
+
+
 
 Imports System
 Imports System.Collections.Generic
@@ -372,7 +372,7 @@ Namespace Models.Db
                                                 ' -- empty content
                                                 If (Not String.IsNullOrEmpty(filename)) Then
                                                     cs.SetField(instanceProperty.Name, "")
-                                                    cp.File.Delete(filename)
+                                                    cp.CdnFiles.DeleteFile(filename)
                                                 End If
                                             Else
                                                 '
@@ -682,7 +682,7 @@ Namespace Models.Db
                     If (Not contentLoaded) Then
                         If (Not String.IsNullOrEmpty(filename)) And (internalCp IsNot Nothing) Then
                             contentLoaded = True
-                            _content = internalCp.File.Read(filename)
+                            _content = internalCp.CdnFiles.Read(filename)
                         End If
                     End If
                     Return _content

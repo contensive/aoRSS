@@ -136,32 +136,20 @@ Namespace Views
             End Try
         End Function
         '
-        Public Function GetContent(cp As CPBaseClass) As String
-        End Function
-
-        Private Sub Link(providers As Object)
-            Throw New NotImplementedException()
-        End Sub
-        '
         '=================================================================================
         '   Read RSS Feed
         '=================================================================================
         '
         Private Function GetRSS(cp As CPBaseClass, Feed As String, MaxStories As Long) As String
-            Dim result As String = ""
             Try
+                Dim result As String = ""
                 '
                 Dim StoryCnt As Integer
-                '
-                'Dim IsRSS As Boolean
-                'Dim isAtom As Boolean
-                '
                 Dim ItemPubDate As String
                 Dim EnclosureRow As String
                 Dim Ptr As Integer
                 Dim Found As Boolean
                 Dim EnclosureCnt As Integer
-                Dim Enclosure() As EnclosureType
                 Dim ChannelImage As String
                 Dim ChannelTitle As String
                 Dim ChannelDescription As String
@@ -169,53 +157,25 @@ Namespace Views
                 Dim ChannelItem As String
                 Dim ChannelLink As String
                 Dim NewChannelImage As String
-                '
                 Dim ItemLink As String
                 Dim ItemTitle As String
                 Dim ItemDescription As String
-                '
                 Dim ImageWidth As String
                 Dim ImageHeight As String
                 Dim ImageTitle As String
                 Dim ImageURL As String
                 Dim ImageLink As String
-                '
-                'Dim FeedHeader As String
-                'Dim VersionString As String
-                'Dim UserError As String
-                'Dim LastRefresh As Date
-                'Dim RefreshHours As Double
-                'Dim FeedConfig As String
-                'Dim ConfigHeader As String
-                'Dim ConfigSplit() As String
                 Dim doc As Xml.XmlDocument
                 Dim RootNode As Xml.XmlNode
                 Dim ChannelNode As Xml.XmlNode
                 Dim ItemNode As Xml.XmlNode
                 Dim ImageNode As Xml.XmlNode
-                'Dim LoopPtr As Long
-                'Dim FeedFilename As String
-                'Dim Link As String
-                '
                 '
                 ' Convert the feed to HTML
                 '
                 If Feed <> "" Then
                     doc = New Xml.XmlDocument
                     doc.LoadXml(Feed)
-                    'Do While doc.readyState <> 4 And LoopPtr < 100
-                    '    Sleep(100)
-                    '    DoEvents
-                    '    LoopPtr = LoopPtr + 1
-                    'Loop
-                    'If doc.parseError.errorCode <> 0 Then
-                    '    '
-                    '    ' error - Need a way to reach the user that submitted the file
-                    '    '
-                    '    If main.IsAdmin Then
-                    '        GetRSS = main.GetAdminHintWrapper("The RSS Feed caused an error, " & doc.parseError.reason)
-                    '    End If
-                    'Else
                     With doc.DocumentElement
                         ChannelTitle = ""
                         ChannelDescription = ""
@@ -283,6 +243,7 @@ Namespace Views
                                                 ItemDescription = ""
                                                 ItemPubDate = ""
                                                 EnclosureCnt = 0
+                                                Dim Enclosure() As EnclosureType = New EnclosureType(0) {}
                                                 For Each ItemNode In ChannelNode.ChildNodes
                                                     Select Case LCase(ItemNode.Name)
                                                         Case "title"
@@ -335,7 +296,7 @@ Namespace Views
                                                                 & vbCrLf & vbTab & vbTab & "</div>"
                                                     End If
                                                 End If
-                                                GetRSS = GetRSS _
+                                                result = result _
                                                         & vbCrLf & vbTab & "<hr style=""clear:both""><div class=ChannelItem>" _
                                                         & ItemTitle _
                                                         & ItemPubDate _
@@ -355,25 +316,24 @@ Namespace Views
                                     If ChannelImage <> "" Then
                                         ChannelDescription = ChannelImage & ChannelDescription
                                     End If
-                                    GetRSS = "" _
-                                            & vbCrLf & vbTab & "<h2>" & ChannelTitle & "</h2>" _
-                                            & vbCrLf & vbTab & "<div class=ChannelPubdate>" & ChannelPubDate & "</div>" _
-                                            & vbCrLf & vbTab & "<div class=ChannelDescription>" & ChannelDescription & "</div>" _
-                                            & GetRSS
+                                    result = "" _
+                                        & vbCrLf & vbTab & "<h2>" & ChannelTitle & "</h2>" _
+                                        & vbCrLf & vbTab & "<div class=ChannelPubdate>" & ChannelPubDate & "</div>" _
+                                        & vbCrLf & vbTab & "<div class=ChannelDescription>" & ChannelDescription & "</div>" _
+                                        & result
                             End Select
                         Next
-                        GetRSS = "" _
+                        result = "" _
                                 & vbCrLf & "<div class=RSSQuickClient>" _
-                                & GetRSS _
+                                & result _
                                 & vbCrLf & "</div>"
                     End With
                 End If
-                result = GetRSS
-                '
+                Return result
             Catch ex As Exception
                 cp.Site.ErrorReport(ex)
+                Throw
             End Try
-            Return result
         End Function
         '
         '=================================================================================
@@ -387,15 +347,11 @@ Namespace Views
                 Dim StoryCnt As Integer
                 Dim Pos As String
                 Dim DateSplit() As String
-                Dim IsRSS As Boolean
-                Dim isAtom As Boolean
                 '
                 Dim ItemPubDate As String
                 Dim EnclosureRow As String
                 Dim Ptr As Integer
-                Dim Found As Boolean
                 Dim EnclosureCnt As Integer
-                Dim Enclosure() As EnclosureType
                 Dim ChannelImage As String
                 Dim ChannelTitle As String
                 Dim ChannelDescription As String
@@ -413,42 +369,16 @@ Namespace Views
                 Dim ImageTitle As String
                 Dim ImageURL As String
                 Dim ImageLink As String
-                '
-                'Dim FeedHeader As String
-                'Dim VersionString As String
-                'Dim UserError As String
-                'Dim LastRefresh As Date
-                'Dim RefreshHours As Double
-                'Dim FeedConfig As String
-                'Dim ConfigHeader As String
-                'Dim ConfigSplit() As String
                 Dim doc As Xml.XmlDocument
                 Dim RootNode As Xml.XmlNode
                 Dim ItemNode As Xml.XmlNode
                 Dim ImageNode As Xml.XmlNode
-                'Dim LoopPtr As Long
-                'Dim FeedFilename As String
-                'Dim Link As String
-                '
                 '
                 ' Convert the feed to HTML
                 '
                 If Feed <> "" Then
                     doc = New Xml.XmlDocument
                     doc.LoadXml(Feed)
-                    'Do While doc.readyState <> 4 And LoopPtr < 100
-                    '    Sleep(100)
-                    '    DoEvents
-                    '    LoopPtr = LoopPtr + 1
-                    'Loop
-                    'If doc.parseError.errorCode <> 0 Then
-                    '    '
-                    '    ' error - Need a way to reach the user that submitted the file
-                    '    '
-                    '    If main.IsAdmin Then
-                    '        GetAtom = main.GetAdminHintWrapper("The RSS Feed caused an error, " & doc.parseError.reason)
-                    '    End If
-                    'Else
                     With doc.DocumentElement
                         ChannelTitle = ""
                         ChannelDescription = ""
@@ -459,8 +389,6 @@ Namespace Views
                             '
                             ' Atom Feed only has one channel, so there is no Channel element
                             '
-                            'pubdate should be updated
-                            'description should be subtitle
                             Select Case LCase(RootNode.Name)
                                 Case "updated"
                                     ChannelPubDate = RootNode.InnerText
@@ -588,6 +516,7 @@ Namespace Views
                                     EnclosureRow = ""
                                     If EnclosureCnt > 0 Then
                                         For Ptr = 0 To EnclosureCnt - 1
+                                            Dim Enclosure() As EnclosureType = New EnclosureType(0) {}
                                             With Enclosure(CInt(Ptr))
                                                 If .URL <> "" Then
                                                     EnclosureRow = EnclosureRow & vbCrLf & vbTab & vbTab & vbTab & "<div class=ItemEnclosure><a href=""" & .URL & """>Media</a></div>"
@@ -601,7 +530,7 @@ Namespace Views
                                                     & vbCrLf & vbTab & vbTab & "</div>"
                                         End If
                                     End If
-                                    GetAtom = GetAtom _
+                                    result = result _
                                             & vbCrLf & vbTab & "<div class=ChannelItem>" _
                                             & ItemTitle _
                                             & ItemPubDate _
@@ -621,14 +550,14 @@ Namespace Views
                         If ChannelImage <> "" Then
                             ChannelDescription = ChannelImage & ChannelDescription
                         End If
-                        GetAtom = "" _
+                        result = "" _
                                 & vbCrLf & vbTab & "<div class=ChannelTitle>" & ChannelTitle & "</div>" _
                                 & vbCrLf & vbTab & "<div class=ChannelPubdate>" & ChannelPubDate & "</div>" _
                                 & vbCrLf & vbTab & "<div class=ChannelDescription>" & ChannelDescription & "</div>" _
-                                & GetAtom
-                        GetAtom = "" _
+                                & result
+                        result = "" _
                                 & vbCrLf & "<div class=RSSQuickClient>" _
-                                & GetAtom _
+                                & result _
                                 & vbCrLf & "</div>"
                     End With
                 End If

@@ -1,10 +1,7 @@
 
-Option Strict On
-Option Explicit On
-
-Imports Contensive.BaseClasses
-Imports Contensive.Addons.Rss.Models.Db
 Imports Contensive.Addons.Rss.Controllers
+Imports Contensive.Addons.Rss.Models.Db
+Imports Contensive.BaseClasses
 
 Namespace Views
     '
@@ -42,7 +39,7 @@ Namespace Views
                         .LogoFilename = feed.LogoFilename,
                         .entryList = New List(Of Models.Domain.FeedEntryModel)
                     }
-                    If String.IsNullOrWhiteSpace(rssFeed.Link) Then rssFeed.Link = "http://" & DomainName & CP.Site.AppRootPath
+                    If String.IsNullOrWhiteSpace(rssFeed.Link) Then rssFeed.Link = "http://" & DomainName
                     Dim testfilename As String = feed.RSSFilename
                     If testfilename = "" Then
                         testfilename = feed.name
@@ -234,7 +231,7 @@ Namespace Views
                             Call ChannelNode.AppendChild(ImageNode)
                             '
                             Node = Doc.CreateElement("url")
-                            Node.InnerText = "http://" & DomainName & CP.Site.AppRootPath & CP.Site.FilePath & .LogoFilename
+                            Node.InnerText = CP.Http.CdnFilePathPrefixAbsolute & .LogoFilename
                             Call ImageNode.AppendChild(Node)
                             '
                             Node = Doc.CreateElement("title")
@@ -371,7 +368,7 @@ Namespace Views
                         End If
                         '
                         ' -- there may be legacy systems that have hardcoded a path from wwwRoot/RSS to these files. In those legacy cases, create an IIS virtual path /RSS to the cden/rss folder
-                        Call CP.File.SaveVirtual(.RSSFilename, "<?xml version=""1.0"" encoding=""" & encoding & """?>" & Doc.InnerXml)
+                        Call CP.CdnFiles.Save(.RSSFilename, "<?xml version=""1.0"" encoding=""" & encoding & """?>" & Doc.InnerXml)
                     End With
                 Next
             Catch ex As Exception
@@ -379,23 +376,6 @@ Namespace Views
             End Try
             Return result
         End Function
-        '
-        '
-
-        Public Sub LogEvent(cp As CPBaseClass, MethodName As String, LogCopy As String)
-            Dim result As String = ""
-            Try
-                '
-                ' ----- Append to the Content Server Log File
-                '
-                'Call AppendLogFile(App.EXEName & "." & MethodName & ", " & LogCopy)
-                Exit Sub
-                '
-            Catch ex As Exception
-                cp.Site.ErrorReport(ex)
-            End Try
-            'Return result
-        End Sub
         '
         '
         '
@@ -415,56 +395,6 @@ Namespace Views
             Return result
             '
 
-        End Function
-        '
-        '
-        '
-        Private Function GetEmailStyles(cp As CPBaseClass, CSEmail As String) As String
-            Dim result As String = ""
-            Try
-                Dim BuildVersion As String = cp.Site.GetText("BuildVersion", "0")
-                If BuildVersion >= "3.3.291" Then
-                    result = cp.Doc.GetText(CSEmail, "InlineStyles")
-                Else
-                    result = "<link rel=""stylesheet"" href=""http://" & GetPrimaryDomainName(cp, cp.Site.DomainList) & cp.Site.PhysicalWWWPath & "styles.css"" type=""text/css"">"
-                End If
-            Catch ex As Exception
-                cp.Site.ErrorReport(ex)
-            End Try
-            Return result
-        End Function
-        '
-        '
-        '
-        Private Sub BuildRSS(cp As CPBaseClass, RSSFeedName As String, RSSFeedID As Integer, RSFilename As String)
-            Dim result As String = ""
-            Try
-                '
-                '
-                '
-                '
-                Exit Sub
-                ' 
-            Catch ex As Exception
-                cp.Site.ErrorReport(ex)
-            End Try
-
-        End Sub
-        '
-        '
-        '
-        Private Function EncodeXMLText(cp As CPBaseClass, src As String) As String
-            Dim result As String = ""
-            Try
-                '
-                result = "<![CDATA[" & src & "]]>"
-                '
-
-                '
-            Catch ex As Exception
-                cp.Site.ErrorReport(ex)
-            End Try
-            Return result
         End Function
         '
         '
@@ -491,12 +421,6 @@ Namespace Views
             Next
             testEncodeFilename = returnString
         End Function
-        '
-        '
-        '
-        'Private Sub HandleClassError(Cause As String, Method As String)
-        '    Call HandleError2(Csv.ApplicationNameLocal, Cause, App.EXEName, "ProcessClass", Method, Err.Number, Err.Source, Err.Description, True, False, "")
-        'End Sub
 
     End Class
 End Namespace

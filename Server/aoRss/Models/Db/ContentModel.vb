@@ -1,12 +1,4 @@
 ﻿
-Option Explicit On
-Option Strict On
-
-Imports System
-Imports System.Collections.Generic
-Imports System.Text
-Imports Contensive.BaseClasses
-
 Namespace Models.Db
     Public Class ContentModel        '<------ set set model Name and everywhere that matches this string
         Inherits BaseModel
@@ -17,10 +9,6 @@ Namespace Models.Db
         Public Const contentName As String = "Content"      '<------ set content name
         Public Const contentTableName As String = "ccContent"   '<------ set to tablename for the primary content (used for cache names)
         Private Shadows Const contentDataSource As String = "default"             '<------ set to datasource if not default
-        '
-        '====================================================================================================
-        ' -- instance properties
-
         Public Property AdminOnly As Boolean
         Public Property AllowAdd As Boolean
         Public Property AllowContentChildTool As Boolean

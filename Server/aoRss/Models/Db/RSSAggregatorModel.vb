@@ -1,12 +1,4 @@
 ﻿
-Option Explicit On
-Option Strict On
-
-Imports System
-Imports System.Collections.Generic
-Imports System.Text
-Imports Contensive.BaseClasses
-
 Namespace Models.Db
     Public Class RSSAggregatorModel
         Inherits BaseModel

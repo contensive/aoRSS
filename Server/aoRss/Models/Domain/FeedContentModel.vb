@@ -1,6 +1,6 @@
 ﻿
-Option Explicit On
-Option Strict On
+
+
 
 Namespace Models.Domain
     Public Class FeedContentModel
