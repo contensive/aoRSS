@@ -10,13 +10,19 @@
     <RootNamespace>Contensive.Addons.Rss</RootNamespace>
     <AssemblyName>aoRss</AssemblyName>
     <MyType>Windows</MyType>
-    <SccProjectName></SccProjectName>
-    <SccLocalPath></SccLocalPath>
-    <SccAuxPath></SccAuxPath>
-    <SccProvider></SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileUpgradeFlags></FileUpgradeFlags>
-    <UpgradeBackupLocation></UpgradeBackupLocation>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkProfile />
     <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.vb</DefaultItemExcludes>
@@ -61,6 +67,9 @@
     <AssemblyOriginatorKeyFile>rss.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ContensiveDbModels, Version=20.0.0.0, Culture=neutral, PublicKeyToken=c014b235a9c6bb22, processorArchitecture=MSIL">
+      <HintPath>..\packages\Contensive.DbModels.23.10.30.5\lib\net472\ContensiveDbModels.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="CPBase, Version=4.1.2.0, Culture=neutral, PublicKeyToken=10b3c53389b845fb, processorArchitecture=MSIL">
       <HintPath>..\packages\Contensive.CPBaseClass.23.10.30.5\lib\net472\CPBase.dll</HintPath>
@@ -83,9 +92,6 @@
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="constants.cs" />
     <Compile Include="Controllers\applicationController.cs" />
-    <Compile Include="Models\Db\ContentFieldModel.cs" />
-    <Compile Include="Models\Db\ContentModel.cs" />
-    <Compile Include="Models\Db\PeopleModel.cs" />
     <Compile Include="Models\Db\RSSAggregatorModel.cs" />
     <Compile Include="Models\Db\RSSAggregatorSourceRuleModel.cs" />
     <Compile Include="Models\Db\RSSAggregatorSourcesModel.cs" />
@@ -147,9 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\GenericController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Db\baseModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\LegacyVb6-ccCommonModule.txt" />

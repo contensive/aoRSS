@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -33,7 +34,7 @@ namespace Contensive.Addons.Rss.Views {
                 if (StoryCnt == 0L) {
                     StoryCnt = 5L;
                 }
-                var RSSAggregator = BaseModel.create<RSSAggregatorModel>(CP, instanceId);
+                var RSSAggregator = DbBaseModel.create<RSSAggregatorModel>(CP, instanceId);
                 int AggregatorId = 0;
                 // cs = csv.opencsContent("RSS aggregators", "(name=" & CP.Utils.EncodeText(AggregatorName) & ")")
                 if (RSSAggregator is not null) {
@@ -44,11 +45,11 @@ namespace Contensive.Addons.Rss.Views {
                     // 
                     // Create new aggregator
                     // 
-                    RSSAggregator = BaseModel.@add<RSSAggregatorModel>(CP);
+                    RSSAggregator = DbBaseModel.addDefault<RSSAggregatorModel>(CP);
                     RSSAggregator.name = "New RSS Aggregator create on-demand " + Conversions.ToString(DateTime.Now);
                     AggregatorId = RSSAggregator.id;
                     RSSAggregator.ccguid = instanceId;
-                    RSSAggregator.save<RSSAggregatorModel>(CP);
+                    RSSAggregator.save(CP);
                     CP.Utils.AppendLog("instanceId=" + instanceId);
 
                     // End If
@@ -107,7 +108,7 @@ namespace Contensive.Addons.Rss.Views {
 
                             // 
 
-                            story.save<RSSAggregatorSourceStorieModel>(CP);
+                            story.save(CP);
                             Ptr = Ptr + 1L;
                         } else {
                             break;

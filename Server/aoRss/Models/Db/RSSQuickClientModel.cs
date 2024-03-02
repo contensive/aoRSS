@@ -1,11 +1,9 @@
 ﻿
-
-
-
+using Contensive.Models.Db;
 using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
-    public class RSSClientModel : BaseModel, ICloneable {
+    public class RSSClientModel : DbBaseModel {
         // 
         // ====================================================================================================
         // -- const
@@ -15,7 +13,7 @@ namespace Contensive.Addons.Rss.Models.Db {
         // 
         // ====================================================================================================
         // -- instance properties
-        // instancePropertiesGoHere
+        // 
         public string url { get; set; }
         public int refreshhours { get; set; }
         public int numberOfStories { get; set; }

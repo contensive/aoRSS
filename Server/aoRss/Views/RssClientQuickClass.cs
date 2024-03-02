@@ -3,6 +3,7 @@ using System.IO;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.Addons.Rss.Models.View;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -22,11 +23,11 @@ namespace Contensive.Addons.Rss.Views {
                     return "";
                 }
                 // 
-                var rssClient = BaseModel.create<RSSClientModel>(CP, request.instanceId);
+                var rssClient = DbBaseModel.create<RSSClientModel>(CP, request.instanceId);
                 if (rssClient is null) {
                     // 
                     // -- create default record
-                    rssClient = BaseModel.@add<RSSClientModel>(CP);
+                    rssClient = DbBaseModel.addDefault<RSSClientModel>(CP);
                     rssClient.ccguid = request.instanceId;
                     rssClient.name = "Quick Client created " + DateTime.Now.ToString();
                     // 
@@ -40,7 +41,7 @@ namespace Contensive.Addons.Rss.Views {
                     rssClient.numberOfStories = CP.Utils.EncodeInteger(CP.Doc.GetText("Number of Stories"));
                     if (rssClient.numberOfStories == 0)
                         rssClient.numberOfStories = 99;
-                    rssClient.save<RSSClientModel>(CP);
+                    rssClient.save(CP);
                 }
                 hint = 20;
                 if (string.IsNullOrWhiteSpace(rssClient.url)) {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Contensive.Addons.Rss.Controllers;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 // 
 namespace Contensive.Addons.Rss.Views {
     // 
@@ -34,7 +35,7 @@ namespace Contensive.Addons.Rss.Views {
                         string test = objectValueFromUI.firstname;
                         // 
                         // -- create sample data
-                        var personList = Models.Db.BaseModel.createList<Models.Db.PeopleModel>(cp, "", "");
+                        var personList = DbBaseModel.createList<PersonModel>(cp, "", "");
                         // 
                         // -- add sample data to a node
                         ae.packageNodeList.Add(new applicationController.packageNodeClass() {

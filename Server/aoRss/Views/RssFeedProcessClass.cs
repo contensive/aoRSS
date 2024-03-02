@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Contensive.Addons.Rss.Controllers;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -32,7 +33,7 @@ namespace Contensive.Addons.Rss.Views {
                 // 
                 // Load the feeds
                 var feedList = new List<Models.Domain.FeedModel>();
-                foreach (RSSFeedModel feed in BaseModel.createList<RSSFeedModel>(CP, "", "id desc")) {
+                foreach (RSSFeedModel feed in DbBaseModel.createList<RSSFeedModel>(CP, "", "id desc")) {
                     var rssFeed = new Models.Domain.FeedModel() {
                         Id = feed.id,
                         Name = feed.name,
@@ -76,19 +77,19 @@ namespace Contensive.Addons.Rss.Views {
                     rssFeed.RSSFilename = testfilename;
                     feedList.Add(rssFeed);
                     feed.RSSDateUpdated = RightNow;
-                    feed.save<RSSFeedModel>(CP);
+                    feed.save(CP);
                 }
                 // 
                 // -- create a list of all RSSFeeds content fields - these are the many-to-many fields that point to story records for each feed
                 int LastTableID = -1;
-                var manyToManyFieldList = BaseModel.createList<ContentFieldModel>(CP, "(name='RSSFeeds')and(type=" + constants.FieldTypeManyToMany + ")and(authorable<>0)", "id desc");
+                var manyToManyFieldList = DbBaseModel.createList<ContentFieldModel>(CP, "(name='RSSFeeds')and(type=" + constants.FieldTypeManyToMany + ")and(authorable<>0)", "id desc");
                 foreach (var manyToManyField in manyToManyFieldList) {
                     // 
                     // -- each many-to-many field represents a checked-box in the RSS Feed tab, associating a story to a feed.
                     // -- go through all records with this many-to-many field checked and add that story to that feed.
-                    var storyContent = BaseModel.create<ContentModel>(CP, manyToManyField.ContentID);
+                    var storyContent = DbBaseModel.create<ContentModel>(CP, manyToManyField.contentId);
                     if (storyContent is not null) {
-                        var manyToManyRuleContent = BaseModel.create<ContentModel>(CP, manyToManyField.ManyToManyRuleContentID);
+                        var manyToManyRuleContent = DbBaseModel.create<ContentModel>(CP, manyToManyField.manyToManyRuleContentId);
                         if (manyToManyRuleContent is not null) {
                             // 
                             // -- open all records in this rule table and associate stories to feeds in the feedlist
@@ -97,12 +98,12 @@ namespace Contensive.Addons.Rss.Views {
                                 do {
                                     // 
                                     // -- find the feed selected in the rule record for this content 
-                                    int feedId = csRuleRecord.GetInteger(manyToManyField.ManyToManyRuleSecondaryField);
+                                    int feedId = csRuleRecord.GetInteger(manyToManyField.manyToManyRuleSecondaryField);
                                     foreach (var feed in feedList) {
                                         if (feedId == feed.Id) {
                                             // 
                                             // -- add the story to this feed
-                                            int storyRecordID = csRuleRecord.GetInteger(manyToManyField.ManyToManyRulePrimaryField);
+                                            int storyRecordID = csRuleRecord.GetInteger(manyToManyField.manyToManyRulePrimaryField);
                                             // 
                                             // -- prevent duplicate stories in the same feed
                                             bool dupFound = false;

@@ -3,6 +3,7 @@ using System.Linq;
 using Contensive.Addons.Rss.Controllers;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 
 namespace Contensive.Addons.Rss.Views {
     // 
@@ -27,8 +28,8 @@ namespace Contensive.Addons.Rss.Views {
             try {
                 string rssName = CP.Doc.GetText("Feed");
                 if (string.IsNullOrWhiteSpace(rssName)) {
-                    var rssfeedList = BaseModel.createList<RSSFeedModel>(CP, "name=" + CP.Db.EncodeSQLText(rssName), "");
-                    if (rssfeedList.Count > 0) {
+                    var rssfeedList = DbBaseModel.createList<RSSFeedModel>(CP, "name=" + CP.Db.EncodeSQLText(rssName), "");
+                    if (rssfeedList.Count() > 0) {
                         return CP.Html.div(GenericController.getFeedLink(CP, rssfeedList.First()), "", "RSSFeedWrapper");
                     }
                 }

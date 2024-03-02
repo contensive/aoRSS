@@ -1,6 +1,7 @@
 ﻿using System;
 using Contensive.Addons.Rss.Controllers;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 
 namespace Contensive.Addons.Rss.Views {
     // 
@@ -15,7 +16,7 @@ namespace Contensive.Addons.Rss.Views {
         public override object Execute(CPBaseClass CP) {
             string result = "";
             try {
-                var rssfeedList = Models.Db.BaseModel.createList<Models.Db.RSSFeedModel>(CP, "", "id desc");
+                var rssfeedList = DbBaseModel.createList<Models.Db.RSSFeedModel>(CP, "", "id desc");
                 if (rssfeedList.Count == 0) {
                     result = CP.Html.p("There are currently no public RSS Feeds available.");
                 } else {

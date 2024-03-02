@@ -1,11 +1,9 @@
 ﻿
-
-
-
+using Contensive.Models.Db;
 using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
-    public class RSSFeedModel : BaseModel, ICloneable {        // <------ set set model Name and everywhere that matches this string
+    public class RSSFeedModel : DbBaseModel {        // <------ set set model Name and everywhere that matches this string
         // 
         // ====================================================================================================
         // -- const
@@ -21,12 +19,5 @@ namespace Contensive.Addons.Rss.Models.Db {
         public string LogoFilename { get; set; }
         public DateTime RSSDateUpdated { get; set; }
         public string RSSFilename { get; set; }
-        // '
-        // '====================================================================================================
-        // Public Overloads Shared Function add(cp As CPBaseClass) As RSSFeedModel
-        // Return add(Of RSSFeedModel)(cp)
-        // End Function
-
-
     }
 }

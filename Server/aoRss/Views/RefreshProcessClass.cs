@@ -2,6 +2,7 @@
 using System.Linq;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
+using Contensive.Models.Db;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -20,8 +21,8 @@ namespace Contensive.Addons.Rss.Views {
             try {
                 string linkRel = "";
                 string LoopPtr = "";
-                var RSSFeedModelList = BaseModel.createList<RSSAggregatorSourcesModel>(CP, "id<>0", "");
-                if (RSSFeedModelList.Count != 0) {
+                var RSSFeedModelList = DbBaseModel.createList<RSSAggregatorSourcesModel>(CP, "id<>0");
+                if (RSSFeedModelList.Count() != 0) {
                     foreach (var RSSFeedxml in RSSFeedModelList) {
                         int sourceId = RSSFeedxml.id;
                         string Link = RSSFeedxml.Link;
@@ -99,9 +100,9 @@ namespace Contensive.Addons.Rss.Views {
                                                     if (string.IsNullOrEmpty(itemGuid)) {
                                                         itemGuid = ItemTitle;
                                                     }
-                                                    var RSSAggregatorSourceStoryList = BaseModel.createList<RSSAggregatorSourceStorieModel>(CP, "(itemGuid=" + CP.Db.EncodeSQLText(itemGuid) + ")and(sourceId=" + sourceId + "))", "");
+                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, "(itemGuid=" + CP.Db.EncodeSQLText(itemGuid) + ")and(sourceId=" + sourceId + "))", "");
                                                     if (RSSAggregatorSourceStoryList is null) {
-                                                        var SourceStory = BaseModel.@add<RSSAggregatorSourceStorieModel>(CP);
+                                                        var SourceStory = DbBaseModel.addDefault<RSSAggregatorSourceStorieModel>(CP);
                                                         SourceStory.pubDate = DateTime.Now;
                                                         SourceStory.sourceId = sourceId;
                                                         SourceStory.itemGuid = itemGuid;
@@ -124,7 +125,7 @@ namespace Contensive.Addons.Rss.Views {
                                                                 SourceStory.pubDate = Conversions.ToDate(ItemPubDate);
                                                             }
                                                         }
-                                                        SourceStory.save<RSSAggregatorSourcesModel>(CP);
+                                                        SourceStory.save(CP);
                                                     }
 
                                                     break;
@@ -189,13 +190,13 @@ namespace Contensive.Addons.Rss.Views {
                                                                     if (string.IsNullOrEmpty(itemGuid)) {
                                                                         itemGuid = ItemTitle;
                                                                     }
-                                                                    var RSSAggregatorSourceStoryList = BaseModel.createList<RSSAggregatorSourceStorieModel>(CP, "(name=" + CP.Db.EncodeSQLText(ItemTitle) + ")and(sourceId=" + sourceId + ")", "");
-                                                                    if (RSSAggregatorSourceStoryList.Count == 0) {
-                                                                        var SourceStory = BaseModel.@add<RSSAggregatorSourceStorieModel>(CP);
+                                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, "(name=" + CP.Db.EncodeSQLText(ItemTitle) + ")and(sourceId=" + sourceId + ")", "");
+                                                                    if (RSSAggregatorSourceStoryList.Count() == 0) {
+                                                                        var SourceStory = DbBaseModel.addDefault<RSSAggregatorSourceStorieModel>(CP);
                                                                         SourceStory.pubDate = DateTime.Now;
                                                                         SourceStory.sourceId = sourceId;
                                                                         SourceStory.itemGuid = itemGuid;
-                                                                        SourceStory.save<RSSAggregatorSourceStorieModel>(CP);
+                                                                        SourceStory.save(CP);
                                                                         RSSAggregatorSourceStoryList.Add(SourceStory);
                                                                     }
                                                                     if (RSSAggregatorSourceStoryList.Count > 0) {
@@ -212,7 +213,7 @@ namespace Contensive.Addons.Rss.Views {
                                                                         if (SourceStory.pubDate != CP.Utils.EncodeDate(ItemPubDate)) {
                                                                             SourceStory.pubDate = Conversions.ToDate(ItemPubDate);
                                                                         }
-                                                                        SourceStory.save<RSSAggregatorSourcesModel>(CP);
+                                                                        SourceStory.save(CP);
                                                                     }
 
                                                                     break;

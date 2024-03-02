@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Contensive.Models.Db;
+using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
-    public class RSSAggregatorSourceRuleModel : BaseModel, ICloneable {
+    public class RSSAggregatorSourceRuleModel : DbBaseModel {
         // 
         // ====================================================================================================
         // -- const
