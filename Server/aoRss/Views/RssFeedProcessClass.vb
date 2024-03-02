@@ -185,7 +185,7 @@ Namespace Views
                 '
                 ' Build the Feeds from the Feed Arrays
                 '
-                Dim serverPageDefault As String = CP.Site.GetProperty("SERVERPAGEDEFAULT", "")
+                Dim serverPageDefault As String = CP.Site.GetText("SERVERPAGEDEFAULT", "")
                 Dim pageContentContentId As Integer = CP.Content.GetID("page content")
                 For Each feed In feedList
                     Dim Doc As Xml.XmlDocument = New Xml.XmlDocument
@@ -294,7 +294,7 @@ Namespace Views
                                             If Left(Link, 1) <> "/" Then
                                                 Link = "/" & Link
                                             End If
-                                            Link = CP.Site.EncodeAppRootPath(Link)
+                                            Link = CP.Utils.EncodeAppRootPath(Link)
                                             Link = "http://" & DomainName & Link
                                         End If
                                         If Link <> "" Then
@@ -365,7 +365,7 @@ Namespace Views
                         Next
                         '
                         ' -- initialize application. If authentication needed and not login page, pass true
-                        Dim encoding As String = CP.Site.GetProperty("Site Character Encoding", "utf-8")
+                        Dim encoding As String = CP.Site.GetText("Site Character Encoding", "utf-8")
                         If encoding = "" Then
                             encoding = "utf-8"
                         End If
@@ -422,7 +422,7 @@ Namespace Views
         Private Function GetEmailStyles(cp As CPBaseClass, CSEmail As String) As String
             Dim result As String = ""
             Try
-                Dim BuildVersion As String = cp.Site.GetProperty("BuildVersion", "0")
+                Dim BuildVersion As String = cp.Site.GetText("BuildVersion", "0")
                 If BuildVersion >= "3.3.291" Then
                     result = cp.Doc.GetText(CSEmail, "InlineStyles")
                 Else

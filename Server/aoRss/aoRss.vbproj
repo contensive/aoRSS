@@ -68,7 +68,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CPBase, Version=4.1.2.0, Culture=neutral, PublicKeyToken=10b3c53389b845fb, processorArchitecture=MSIL">
-      <HintPath>..\packages\Contensive.CPBaseClass.5.2004.14.6\lib\net472\CPBase.dll</HintPath>
+      <HintPath>..\packages\Contensive.CPBaseClass.23.10.30.5\lib\net472\CPBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -173,9 +173,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>iisreset
-del "C:\ProgramData\Contensive\AddonAssemblyBypass\*.*" /q
-copy "$(TargetDir)*.dll" "C:\ProgramData\Contensive\AddonAssemblyBypass"
+    <PostBuildEvent>
 
 </PostBuildEvent>
   </PropertyGroup>
