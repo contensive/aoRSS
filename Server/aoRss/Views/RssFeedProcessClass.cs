@@ -52,13 +52,13 @@ namespace Contensive.Addons.Rss.Views {
                         testfilename = "RSSFeed" + feed.id;
                     }
                     string testFilenameNoExt = testfilename;
-                    Pos = Strings.InStr(1, testFilenameNoExt, ".xml", Constants.vbTextCompare);
+                    Pos = Strings.InStr(1, testFilenameNoExt, ".xml", CompareMethod.Text);
                     if (Pos > 0) {
                         testFilenameNoExt = Strings.Mid(testFilenameNoExt, 1, Pos - 1);
                     }
                     // 
                     // -- 20190114, from VS, removes everything before the first Unix slash
-                    Pos = Strings.InStr(1, testFilenameNoExt, "/", Constants.vbTextCompare);
+                    Pos = Strings.InStr(1, testFilenameNoExt, "/", CompareMethod.Text);
                     if (Pos > 0) {
                         testFilenameNoExt = Strings.Mid(testFilenameNoExt, Pos + 1);
                     }
@@ -67,7 +67,7 @@ namespace Contensive.Addons.Rss.Views {
                     int suffixNumber = 1;
                     string testFilenameRoot = testFilenameNoExt;
                     string usedFilenames = "";
-                    while (suffixNumber < 100 & Strings.InStr(1, "," + usedFilenames + ",", "," + testFilenameNoExt + ",", Constants.vbTextCompare) != 0) {
+                    while (suffixNumber < 100 & Strings.InStr(1, "," + usedFilenames + ",", "," + testFilenameNoExt + ",", CompareMethod.Text) != 0) {
                         testFilenameNoExt = testFilenameRoot + suffixNumber.ToString();
                         suffixNumber = suffixNumber + 1;
                     }
@@ -82,7 +82,7 @@ namespace Contensive.Addons.Rss.Views {
                 // 
                 // -- create a list of all RSSFeeds content fields - these are the many-to-many fields that point to story records for each feed
                 int LastTableID = -1;
-                var manyToManyFieldList = DbBaseModel.createList<ContentFieldModel>(CP, "(name='RSSFeeds')and(type=" + constants.FieldTypeManyToMany + ")and(authorable<>0)", "id desc");
+                var manyToManyFieldList = DbBaseModel.createList<ContentFieldModel>(CP, "(name='RSSFeeds')and(type=" + Constants.FieldTypeManyToMany + ")and(authorable<>0)", "id desc");
                 foreach (var manyToManyField in manyToManyFieldList) {
                     // 
                     // -- each many-to-many field represents a checked-box in the RSS Feed tab, associating a story to a feed.
@@ -442,7 +442,7 @@ namespace Contensive.Addons.Rss.Views {
             var loopTo = cnt;
             for (Ptr = 1; Ptr <= loopTo; Ptr++) {
                 chr = Strings.Mid(Source, Ptr, 1);
-                if (Conversions.ToBoolean(Strings.InStr(1, allowed, chr, Constants.vbBinaryCompare))) {
+                if (Conversions.ToBoolean(Strings.InStr(1, allowed, chr, CompareMethod.Binary))) {
                     returnString = returnString + chr;
                 }
             }

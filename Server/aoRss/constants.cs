@@ -2,12 +2,7 @@
 using Microsoft.VisualBasic;
 
 namespace Contensive.Addons.Rss {
-
-
-
-
-
-    public static class constants {
+    public static class Constants {
         // 
         // -- sample
         // =======================================================================
@@ -21,6 +16,7 @@ namespace Contensive.Addons.Rss {
         // content replacements
         // =======================================================================
         // 
+        public const int vbLongDate = 1;
         public const string contentReplaceEscapeStart = "{%";
         public const string contentReplaceEscapeEnd = "%}";
         // 
@@ -71,6 +67,8 @@ namespace Contensive.Addons.Rss {
         // 
         public const string PageChildListInstanceID = "{ChildPageList}";
         // 
+        public const string vbCrLf = "\n\r";
+        public const string vbTab = "\t";
         public const string cr = Constants.vbCrLf + Constants.vbTab;
         public const string cr2 = cr + Constants.vbTab;
         public const string cr3 = cr2 + Constants.vbTab;

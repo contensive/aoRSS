@@ -3,12 +3,12 @@ using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
     public class RSSAggregatorSourceRuleModel : DbBaseModel {
-        // 
-        // ====================================================================================================
-        // -- const
-        public const string contentName = "RSS Aggregator Source Rules";                   // <------ set content name
-        public const string contentTableName = "aoRSSAggregatorSourceRules";            // <------ set to tablename for the primary content (used for cache names)
-        private new const string contentDataSource = "default";   // <------ set to datasource if not default
+        //
+        //====================================================================================================
+        /// <summary>
+        /// table definition
+        /// </summary>
+        public static DbBaseTableMetadataModel tableMetadata { get; } = new DbBaseTableMetadataModel("RSS Aggregator Source Rules", "aoRSSAggregatorSourceRules", "default", false);
         // 
         // ====================================================================================================
         // -- instance properties

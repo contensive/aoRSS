@@ -12,31 +12,31 @@ namespace Contensive.Addons.Rss.Controllers {
             // 
             if (Information.IsDate(DateValue)) {
                 switch (DateAndTime.Weekday(DateValue)) {
-                    case (int)Constants.vbSunday: {
+                    case (int) 1: {
                             result = "Sun, ";
                             break;
                         }
-                    case (int)Constants.vbMonday: {
+                    case (int)2: {
                             result = "Mon, ";
                             break;
                         }
-                    case (int)Constants.vbTuesday: {
+                    case (int)3: {
                             result = "Tue, ";
                             break;
                         }
-                    case (int)Constants.vbWednesday: {
+                    case (int)4: {
                             result = "Wed, ";
                             break;
                         }
-                    case (int)Constants.vbThursday: {
+                    case (int)5: {
                             result = "Thu, ";
                             break;
                         }
-                    case (int)Constants.vbFriday: {
+                    case (int)6: {
                             result = "Fri, ";
                             break;
                         }
-                    case (int)Constants.vbSaturday: {
+                    case (int)7: {
                             result = "Sat, ";
                             break;
                         }

@@ -9,7 +9,7 @@ namespace Contensive.Addons.Rss.Controllers {
     /// 
     /// </summary>
     /// <remarks></remarks>
-    public class applicationController : IDisposable {
+    public class xApplicationController : IDisposable {
         // 
         // privates passed in, do not dispose
         // 
@@ -44,7 +44,7 @@ namespace Contensive.Addons.Rss.Controllers {
         public string getSerializedPackage() {
             string result = "";
             try {
-                result = serializeObject(cp, new packageClass() {
+                result = cp.JSON.Serialize(new packageClass() {
                     success = packageErrorList.Count.Equals(0),
                     nodeList = packageNodeList,
                     errorList = packageErrorList,
@@ -62,26 +62,15 @@ namespace Contensive.Addons.Rss.Controllers {
         /// Constructor
         /// </summary>
         /// <remarks></remarks>
-        public applicationController(CPBaseClass cp, bool requiresAuthentication = true) {
+        public xApplicationController(CPBaseClass cp, bool requiresAuthentication = true) {
             this.cp = cp;
             string sql = "";
             var cs = cp.CSNew();
             string localSystemStatus = "";
             if (requiresAuthentication & !cp.User.IsAuthenticated) {
-                packageErrorList.Add(new packageErrorClass() { number = (int)constants.resultErrorEnum.errAuthentication, description = "Authorization is required." });
-                cp.Response.SetStatus(((int)constants.httpErrorEnum.forbidden).ToString() + " Forbidden");
+                packageErrorList.Add(new packageErrorClass() { number = (int)Constants.resultErrorEnum.errAuthentication, description = "Authorization is required." });
+                cp.Response.SetStatus(((int)Constants.httpErrorEnum.forbidden).ToString() + " Forbidden");
             }
-        }
-        // 
-        public static string serializeObject(CPBaseClass CP, object dataObject) {
-            string result = "";
-            try {
-                var json_serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-                result = json_serializer.Serialize(dataObject);
-            } catch (Exception ex) {
-                CP.Site.ErrorReport(ex);
-            }
-            return result;
         }
         // 
         // ====================================================================================================
@@ -153,7 +142,7 @@ namespace Contensive.Addons.Rss.Controllers {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        ~applicationController() {
+        ~xApplicationController() {
             Dispose(false);
         }
         #endregion

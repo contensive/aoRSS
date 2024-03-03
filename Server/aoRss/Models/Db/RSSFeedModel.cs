@@ -3,13 +3,13 @@ using Contensive.Models.Db;
 using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
-    public class RSSFeedModel : DbBaseModel {        // <------ set set model Name and everywhere that matches this string
-        // 
-        // ====================================================================================================
-        // -- const
-        public const string contentName = "RSS Feeds";      // <------ set content name
-        public const string contentTableName = "ccRSSFeeds";   // <------ set to tablename for the primary content (used for cache names)
-        private new const string contentDataSource = "default";             // <------ set to datasource if not default
+    public class RSSFeedModel : DbBaseModel {
+        //
+        //====================================================================================================
+        /// <summary>
+        /// table definition
+        /// </summary>
+        public static DbBaseTableMetadataModel tableMetadata { get; } = new DbBaseTableMetadataModel("RSS Feeds", "ccRSSFeeds", "default", false);
         // 
         // ====================================================================================================
         // -- instance properties

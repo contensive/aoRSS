@@ -6,13 +6,13 @@ using Contensive.Models.Db;
 using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
-    public class RSSAggregatorSourcesModel : DbBaseModel  {
-        // 
-        // ====================================================================================================
-        // -- const
-        public const string contentName = "RSS Aggregator Sources";                   // <------ set content name
-        public const string contentTableName = "aoRSSAggregatorSources";            // <------ set to tablename for the primary content (used for cache names)
-        private new const string contentDataSource = "default";   // <------ set to datasource if not default
+    public class RSSAggregatorSourcesModel : DbBaseModel {
+        //
+        //====================================================================================================
+        /// <summary>
+        /// table definition
+        /// </summary>
+        public static DbBaseTableMetadataModel tableMetadata { get; } = new DbBaseTableMetadataModel("RSS Aggregator Sources", "aoRSSAggregatorSources", "default", false);
         // 
         // ====================================================================================================
         // -- instance properties

@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
-using Contensive.Addons.Rss.Models.Db;
+﻿using Contensive.Addons.Rss.Models.Db;
 using Contensive.Addons.Rss.Models.View;
 using Contensive.BaseClasses;
 using Contensive.Models.Db;
 using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+using System;
+using System.IO;
 
 namespace Contensive.Addons.Rss.Views {
     // 
@@ -110,7 +109,7 @@ namespace Contensive.Addons.Rss.Views {
                             // Atom Feed
                             // 
                             bool isAtom = true;
-                            result = GetAtom(CP, doc.InnerXml, rssClient.numberOfStories.ToString());
+                            result = GetAtom(CP, doc.InnerXml, rssClient.numberOfStories);
                         } else {
                             // 
                             // Bad Feed
@@ -126,7 +125,7 @@ namespace Contensive.Addons.Rss.Views {
                     // Save this feed into the cache
                     // 
                     if (SaveCache) {
-                        string FeedHeader = "RSS Client Quick Reader" + Constants.vbCrLf + Conversions.ToString(DateTime.Now);
+                        string FeedHeader = "RSS Client Quick Reader" + Constants.vbCrLf + DateTime.Now.ToLongDateString();
                         CP.CdnFiles.Save(feedCacheFilename, FeedHeader + Constants.vbCrLf + feedContent);
                     }
                     hint = 80;
@@ -377,12 +376,12 @@ namespace Contensive.Addons.Rss.Views {
         // Read Atom Feed
         // =================================================================================
         // 
-        private string GetAtom(CPBaseClass cp, string Feed, string MaxStories) {
+        private string GetAtom(CPBaseClass cp, string Feed, int MaxStories) {
             string result = "";
             try {
                 // 
                 var StoryCnt = default(int);
-                string Pos;
+                int  Pos;
                 string[] DateSplit;
                 // 
                 string ItemPubDate;
@@ -429,14 +428,14 @@ namespace Contensive.Addons.Rss.Views {
                             switch (Strings.LCase(RootNode.Name) ?? "") {
                                 case "updated": {
                                         ChannelPubDate = RootNode.InnerText;
-                                        Pos = Strings.InStr(1, ChannelPubDate, "T", Constants.vbTextCompare).ToString();
-                                        if (Conversions.ToInteger(Pos) > 0) {
-                                            ChannelPubDate = Strings.Mid(ChannelPubDate, 1, Conversions.ToInteger(Pos) - 1);
-                                            Pos = Strings.InStr(1, ChannelPubDate, "-").ToString();
-                                            if (Conversions.ToInteger(Pos) > 0) {
+                                        Pos = Strings.InStr(1, ChannelPubDate, "T", CompareMethod.Text);
+                                        if (Pos > 0) {
+                                            ChannelPubDate = Strings.Mid(ChannelPubDate, 1, Pos - 1);
+                                            Pos = Strings.InStr(1, ChannelPubDate, "-");
+                                            if (Pos > 0) {
                                                 DateSplit = Strings.Split(ChannelPubDate, "-");
                                                 if (Information.UBound(DateSplit) == 2) {
-                                                    ChannelPubDate = Strings.FormatDateTime(cp.Utils.EncodeDate(DateSplit[1] + "/" + DateSplit[2] + "/" + DateSplit[0]), Constants.vbLongDate);
+                                                    ChannelPubDate = Strings.FormatDateTime(cp.Utils.EncodeDate(DateSplit[1] + "/" + DateSplit[2] + "/" + DateSplit[0]), DateFormat.LongDate);
                                                 }
                                             }
                                         }
@@ -537,15 +536,15 @@ namespace Contensive.Addons.Rss.Views {
                                                     }
                                                 case "updated": {
                                                         ItemPubDate = ItemNode.InnerText;
-                                                        Pos = Strings.InStr(1, ItemPubDate, "T", Constants.vbTextCompare).ToString();
-                                                        if (Conversions.ToInteger(Pos) > 0) {
-                                                            ItemPubDate = Strings.Mid(ItemPubDate, 1, Conversions.ToInteger(Pos) - 1);
-                                                            Pos = Strings.InStr(1, ItemPubDate, "-").ToString();
-                                                            if (Conversions.ToInteger(Pos) > 0) {
+                                                        Pos = Strings.InStr(1, ItemPubDate, "T", CompareMethod.Text);
+                                                        if (Pos > 0) {
+                                                            ItemPubDate = Strings.Mid(ItemPubDate, 1, Pos - 1);
+                                                            Pos = Strings.InStr(1, ItemPubDate, "-");
+                                                            if (Pos > 0) {
                                                                 DateSplit = Strings.Split(ItemPubDate, "-");
                                                                 if (Information.UBound(DateSplit) == 2) {
                                                                     // ItemPubDate = FormatDateTime(KmaEncodeDate(CStr(DateSplit(2) & "/" & DateSplit(1) & "/" & DateSplit(0))), vbLongDate)
-                                                                    ItemPubDate = Strings.FormatDateTime(cp.Utils.EncodeDate(DateSplit[1] + "/" + DateSplit[2] + "/" + DateSplit[0]), Constants.vbLongDate);
+                                                                    ItemPubDate = Strings.FormatDateTime(cp.Utils.EncodeDate(DateSplit[1] + "/" + DateSplit[2] + "/" + DateSplit[0]), DateFormat.LongDate);
                                                                 }
                                                             }
                                                         }
@@ -607,7 +606,7 @@ namespace Contensive.Addons.Rss.Views {
 
 
                                         StoryCnt = StoryCnt + 1;
-                                        if (StoryCnt >= Conversions.ToInteger(MaxStories)) {
+                                        if (StoryCnt >= MaxStories) {
                                             exitFor = true;
                                             break;
                                         }
@@ -681,8 +680,8 @@ namespace Contensive.Addons.Rss.Views {
         // 
         private string encodeFilename(string Filename) {
             string result = Filename.ToLower().Replace("http://", "").Replace("https://", "").Replace("/", "-");
-            foreach (var c in Path.GetInvalidFileNameChars())
-                result = result.Replace(Conversions.ToString(c), "");
+            foreach (char c in Path.GetInvalidFileNameChars())
+                result = result.Replace(c.ToString(), "");
             return result;
         }
         // 

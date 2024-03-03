@@ -4,12 +4,12 @@ using System;
 
 namespace Contensive.Addons.Rss.Models.Db {
     public class RSSClientModel : DbBaseModel {
-        // 
-        // ====================================================================================================
-        // -- const
-        public const string contentName = "RSS Clients";
-        public const string contentTableName = "ccRssClients";
-        private new const string contentDataSource = "default";             // <------ set to datasource if not default
+        //
+        //====================================================================================================
+        /// <summary>
+        /// table definition
+        /// </summary>
+        public static DbBaseTableMetadataModel tableMetadata { get; } = new DbBaseTableMetadataModel("RSS Clients", "ccRssClients", "default", false);
         // 
         // ====================================================================================================
         // -- instance properties
