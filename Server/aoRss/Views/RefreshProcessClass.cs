@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
 using Contensive.Models.Db;
@@ -30,7 +31,13 @@ namespace Contensive.Addons.Rss.Views {
                         // Convert the feed to HTML
                         if (!string.IsNullOrEmpty(Link)) {
                             var doc = new System.Xml.XmlDocument();
-                            doc.Load(Link);
+                            try {
+                                doc.Load(Link);
+                            } catch (WebException ex) {
+                                string shortmsg = $"RSS Aggregator error";
+                                string longmsg = $"RSS Aggrgator Sources contains a link that fails with [{ex.ToString()}]";
+                                CP.Site.LogWarning(shortmsg, longmsg, shortmsg, shortmsg);
+                            }
                             string ItemTitle = "";
                             string ItemLink = "";
                             string ItemDescription = "";

@@ -88,9 +88,9 @@ namespace Contensive.Addons.Rss.Views {
                     // -- each many-to-many field represents a checked-box in the RSS Feed tab, associating a story to a feed.
                     // -- go through all records with this many-to-many field checked and add that story to that feed.
                     var storyContent = DbBaseModel.create<ContentModel>(CP, manyToManyField.contentId);
-                    if (storyContent is not null) {
+                    if (storyContent != null) {
                         var manyToManyRuleContent = DbBaseModel.create<ContentModel>(CP, manyToManyField.manyToManyRuleContentId);
-                        if (manyToManyRuleContent is not null) {
+                        if (manyToManyRuleContent != null) {
                             // 
                             // -- open all records in this rule table and associate stories to feeds in the feedlist
                             var csRuleRecord = CP.CSNew();
