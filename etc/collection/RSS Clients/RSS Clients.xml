@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="RSS Clients" guid="{685e4c5c-6e24-4a1d-8a43-b7f1710500d4}" system="No" updatable="Yes" blockNavigatorNode="No">
+<Collection name="RSS Clients" guid="{685e4c5c-6e24-4a1d-8a43-b7f1710500d4}" system="No" updatable="Yes" blockNavigatorNode="No"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://contensive.s3.amazonaws.com/xsd/Collection.xsd"
+>
 	<HelpLink>http://wiki.kmacloud.net/index.php?title=RSS_Clients</HelpLink>
 	<Help></Help>
 	<Addon name="model data" guid="{0C1B4D8D-CCA5-4075-ADC0-D487AA88D1D1}" type="Add-on">

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="Webcast and Podcast" guid="{A651410B-5848-46BF-AFDB-3A8D3E895B9D}" system="No" updatable="Yes">
+<Collection name="Webcast and Podcast" guid="{A651410B-5848-46BF-AFDB-3A8D3E895B9D}" system="No" updatable="Yes"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://contensive.s3.amazonaws.com/xsd/Collection.xsd"
+>
 	<Help></Help>
 	<Addon name="Webcast Add-on" guid="{F6037DEE-023C-4A14-A972-ADAFA5538240}" type="Add-on">
 		<Copy></Copy>
