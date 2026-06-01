@@ -1,16 +1,14 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
 using Contensive.Models.Db;
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace Contensive.Addons.Rss.Views {
-    // 
+    //
     public class RefreshProcessClass : AddonBaseClass {
-        // 
+        //
         // =====================================================================================
         /// <summary>
         /// AddonDescription
@@ -27,15 +25,15 @@ namespace Contensive.Addons.Rss.Views {
                     foreach (var RSSFeedxml in RSSFeedModelList) {
                         int sourceId = RSSFeedxml.id;
                         string Link = RSSFeedxml.Link;
-                        // 
+                        //
                         // Convert the feed to HTML
                         if (!string.IsNullOrEmpty(Link)) {
                             var doc = new System.Xml.XmlDocument();
                             try {
                                 doc.Load(Link);
                             } catch (WebException ex) {
-                                string shortmsg = $"RSS Aggregator error";
-                                string longmsg = $"RSS Aggrgator Sources contains a link that fails with [{ex.ToString()}]";
+                                string shortmsg = "RSS Aggregator error";
+                                string longmsg = $"RSS Aggrgator Sources contains a link that fails with [{ex}]";
                                 CP.Site.LogWarning(shortmsg, longmsg, shortmsg, shortmsg);
                             }
                             string ItemTitle = "";
@@ -46,15 +44,15 @@ namespace Contensive.Addons.Rss.Views {
                             System.Xml.XmlNode ChannelNode;
                             System.Xml.XmlNode ItemNode;
                             string itemGuid = "";
-                            bool isAtom = Strings.LCase(doc.DocumentElement.Name) == "feed";
+                            bool isAtom = string.Equals(doc.DocumentElement.Name, "feed", StringComparison.OrdinalIgnoreCase);
                             if (isAtom) {
-                                // 
+                                //
                                 // atom feed
                                 {
                                     var withBlock = doc.DocumentElement;
                                     foreach (System.Xml.XmlNode currentRootNode in withBlock.ChildNodes) {
                                         RootNode = currentRootNode;
-                                        switch (Strings.LCase(RootNode.Name) ?? "") {
+                                        switch ((RootNode.Name ?? "").ToLowerInvariant()) {
                                             case "entry": {
                                                     ChannelNode = RootNode;
                                                     ItemTitle = "";
@@ -64,7 +62,7 @@ namespace Contensive.Addons.Rss.Views {
                                                     itemGuid = "";
                                                     foreach (System.Xml.XmlNode currentItemNode in ChannelNode.ChildNodes) {
                                                         ItemNode = currentItemNode;
-                                                        switch (Strings.LCase(ItemNode.Name) ?? "") {
+                                                        switch ((ItemNode.Name ?? "").ToLowerInvariant()) {
                                                             case "id": {
                                                                     itemGuid = ItemNode.InnerText;
                                                                     break;
@@ -75,9 +73,9 @@ namespace Contensive.Addons.Rss.Views {
                                                                 }
                                                             case "content": {
                                                                     ItemDescription = ItemNode.InnerText;
-                                                                    // 
+                                                                    //
                                                                     // clear any styles out of the description
-                                                                    // 
+                                                                    //
                                                                     ItemDescription = ItemDescription;
                                                                     break;
                                                                 }
@@ -85,9 +83,9 @@ namespace Contensive.Addons.Rss.Views {
 
                                                                     string linkType;
                                                                     bool isFound = false;
-                                                                    linkType = GetXMLAttribute(CP, isFound, (System.Xml.XmlDocument)ItemNode, "type");
+                                                                    linkType = GetXMLAttribute(CP, isFound, ItemNode, "type");
                                                                     if (string.IsNullOrEmpty(ItemLink) & (!isFound | linkType == "text/html")) {
-                                                                        ItemLink = GetXMLAttribute(CP, isFound, (System.Xml.XmlDocument)ItemNode, "href");
+                                                                        ItemLink = GetXMLAttribute(CP, isFound, ItemNode, "href");
                                                                     }
 
                                                                     break;
@@ -99,15 +97,15 @@ namespace Contensive.Addons.Rss.Views {
                                                         }
                                                     }
                                                     if (!string.IsNullOrEmpty(ItemPubDate)) {
-                                                        string Pos = Strings.InStr(1, ItemPubDate, "T").ToString();
-                                                        if (Conversions.ToInteger(Pos) > 1) {
-                                                            ItemPubDate = Strings.Left(ItemPubDate, Conversions.ToInteger(Pos) - 1);
+                                                        int tPos = ItemPubDate.IndexOf("T", StringComparison.OrdinalIgnoreCase);
+                                                        if (tPos > 0) {
+                                                            ItemPubDate = ItemPubDate.Substring(0, tPos);
                                                         }
                                                     }
                                                     if (string.IsNullOrEmpty(itemGuid)) {
                                                         itemGuid = ItemTitle;
                                                     }
-                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, "(itemGuid=" + CP.Db.EncodeSQLText(itemGuid) + ")and(sourceId=" + sourceId + "))", "");
+                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, $"(itemGuid={CP.Db.EncodeSQLText(itemGuid)})and(sourceId={sourceId}))", "");
                                                     if (RSSAggregatorSourceStoryList is null) {
                                                         var SourceStory = DbBaseModel.addDefault<RSSAggregatorSourceStorieModel>(CP);
                                                         SourceStory.pubDate = DateTime.Now;
@@ -127,9 +125,10 @@ namespace Contensive.Addons.Rss.Views {
                                                             SourceStory.link = ItemLink;
                                                         }
 
-                                                        if (CP.Utils.EncodeDate(SourceStory.pubDate) != Conversions.ToDate("0")) {
+                                                        if (CP.Utils.EncodeDate(SourceStory.pubDate) != DateTime.MinValue) {
                                                             if (SourceStory.pubDate != CP.Utils.EncodeDate(ItemPubDate)) {
-                                                                SourceStory.pubDate = Conversions.ToDate(ItemPubDate);
+                                                                DateTime.TryParse(ItemPubDate, out DateTime parsedDate);
+                                                                SourceStory.pubDate = parsedDate;
                                                             }
                                                         }
                                                         SourceStory.save(CP);
@@ -141,17 +140,17 @@ namespace Contensive.Addons.Rss.Views {
                                     }
                                 }
                             } else {
-                                // 
+                                //
                                 // RSS
                                 {
                                     var withBlock1 = doc.DocumentElement;
                                     foreach (System.Xml.XmlNode currentRootNode1 in withBlock1.ChildNodes) {
                                         RootNode = currentRootNode1;
-                                        switch (Strings.LCase(RootNode.Name) ?? "") {
+                                        switch ((RootNode.Name ?? "").ToLowerInvariant()) {
                                             case "channel": {
                                                     foreach (System.Xml.XmlNode currentChannelNode in RootNode.ChildNodes) {
                                                         ChannelNode = currentChannelNode;
-                                                        switch (Strings.LCase(ChannelNode.Name) ?? "") {
+                                                        switch ((ChannelNode.Name ?? "").ToLowerInvariant()) {
                                                             case "item": {
                                                                     ItemTitle = "";
                                                                     ItemLink = "";
@@ -160,7 +159,7 @@ namespace Contensive.Addons.Rss.Views {
                                                                     itemGuid = "";
                                                                     foreach (System.Xml.XmlNode currentItemNode1 in ChannelNode.ChildNodes) {
                                                                         ItemNode = currentItemNode1;
-                                                                        switch (Strings.LCase(ItemNode.Name) ?? "") {
+                                                                        switch ((ItemNode.Name ?? "").ToLowerInvariant()) {
                                                                             case "guid": {
                                                                                     itemGuid = ItemNode.InnerText;
                                                                                     break;
@@ -171,9 +170,9 @@ namespace Contensive.Addons.Rss.Views {
                                                                                 }
                                                                             case "description": {
                                                                                     ItemDescription = ItemNode.InnerText;
-                                                                                    // 
+                                                                                    //
                                                                                     // clear any styles out of the description
-                                                                                    // 
+                                                                                    //
                                                                                     ItemDescription = ItemDescription;
                                                                                     break;
                                                                                 }
@@ -188,16 +187,15 @@ namespace Contensive.Addons.Rss.Views {
                                                                         }
                                                                     }
                                                                     if (!string.IsNullOrEmpty(ItemPubDate)) {
-                                                                        string[] DateSplit = Strings.Split(ItemPubDate, " ");
-                                                                        if (Information.UBound(DateSplit) > 2) {
-                                                                            ItemPubDate = DateSplit[1] + " " + DateSplit[2] + " " + DateSplit[3];
-                                                                            // ItemPubDate = DateSplit(0) & " " & DateSplit(1) & " " & DateSplit(2) & " " & DateSplit(3)
+                                                                        string[] DateSplit = ItemPubDate.Split(' ');
+                                                                        if (DateSplit.Length - 1 > 2) {
+                                                                            ItemPubDate = $"{DateSplit[1]} {DateSplit[2]} {DateSplit[3]}";
                                                                         }
                                                                     }
                                                                     if (string.IsNullOrEmpty(itemGuid)) {
                                                                         itemGuid = ItemTitle;
                                                                     }
-                                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, "(name=" + CP.Db.EncodeSQLText(ItemTitle) + ")and(sourceId=" + sourceId + ")", "");
+                                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, $"(name={CP.Db.EncodeSQLText(ItemTitle)})and(sourceId={sourceId})", "");
                                                                     if (RSSAggregatorSourceStoryList.Count() == 0) {
                                                                         var SourceStory = DbBaseModel.addDefault<RSSAggregatorSourceStorieModel>(CP);
                                                                         SourceStory.pubDate = DateTime.Now;
@@ -218,7 +216,8 @@ namespace Contensive.Addons.Rss.Views {
                                                                             SourceStory.link = ItemLink;
                                                                         }
                                                                         if (SourceStory.pubDate != CP.Utils.EncodeDate(ItemPubDate)) {
-                                                                            SourceStory.pubDate = Conversions.ToDate(ItemPubDate);
+                                                                            DateTime.TryParse(ItemPubDate, out DateTime parsedDate);
+                                                                            SourceStory.pubDate = parsedDate;
                                                                         }
                                                                         SourceStory.save(CP);
                                                                     }
@@ -244,67 +243,64 @@ namespace Contensive.Addons.Rss.Views {
         }
 
 
-        // 
+        //
         // ========================================================================
         // ----- Get an XML nodes attribute based on its name
         // ========================================================================
-        // 
-        internal string GetXMLAttribute(CPBaseClass cp, bool Found, System.Xml.XmlDocument Node, string Name) {
-            string GetXMLAttributeRet = default;
+        //
+        internal string GetXMLAttribute(CPBaseClass cp, bool Found, System.Xml.XmlNode Node, string Name) {
             string result = "";
-            // 
+            //
             try {
-                System.Xml.XmlNode REsultNode;
-                string UcaseName;
-                // 
+                System.Xml.XmlNode resultNode;
+                //
                 Found = false;
-                REsultNode = Node.Attributes.GetNamedItem(Name);
-                if (REsultNode is null) {
-                    UcaseName = Strings.UCase(Name);
+                if (Node.Attributes == null) {
+                    return result;
+                }
+                resultNode = Node.Attributes.GetNamedItem(Name);
+                if (resultNode is null) {
+                    string UcaseName = Name.ToUpperInvariant();
                     foreach (System.Xml.XmlAttribute NodeAttribute in Node.Attributes) {
-                        if ((Strings.UCase(NodeAttribute.Name) ?? "") == (UcaseName ?? "")) {
-                            GetXMLAttributeRet = NodeAttribute.Value;
+                        if (string.Equals(NodeAttribute.Name, UcaseName, StringComparison.OrdinalIgnoreCase)) {
+                            result = NodeAttribute.Value;
                             Found = true;
                             break;
                         }
                     }
                 } else {
-                    GetXMLAttributeRet = REsultNode.Value;
+                    result = resultNode.Value;
                     Found = true;
                 }
             } catch (Exception ex) {
                 cp.Site.ErrorReport(ex);
             }
             return result;
-            // 
+            //
 
         }
-        // 
+        //
         // clear anything in between and including <style> tags and from description
-        // 
+        //
         private string clearStyles(CPBaseClass cp, string givenString) {
-            string clearStylesRet = default;
             string Result = "";
-            // 
+            //
             try {
                 string output;
-                string posStart;
-                string posEnd;
-                string styles;
-                // 
-                posStart = Strings.InStr(givenString, "<style>").ToString();
-                posEnd = (Strings.InStr(givenString, "</style>") + Strings.Len("</style>") - 1).ToString();
-                // 
-                if (Conversions.ToInteger(posStart) != 0) {
-                    styles = Strings.Mid(givenString, Conversions.ToInteger(posStart), Conversions.ToInteger(posEnd));
-                    output = Strings.Replace(givenString, styles, "");
+                //
+                int posStart = givenString.IndexOf("<style>", StringComparison.OrdinalIgnoreCase);
+                int posEnd = givenString.IndexOf("</style>", StringComparison.OrdinalIgnoreCase);
+                //
+                if (posStart >= 0 && posEnd >= 0) {
+                    posEnd = posEnd + "</style>".Length;
+                    string styles = givenString.Substring(posStart, posEnd - posStart);
+                    output = givenString.Replace(styles, "");
                 } else {
                     output = givenString;
                 }
-                // 
-                clearStylesRet = output;
-                Result = clearStylesRet;
-                // 
+                //
+                Result = output;
+                //
             } catch (Exception ex) {
                 cp.Site.ErrorReport(ex);
             }

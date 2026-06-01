@@ -8,7 +8,6 @@
 	<Addon name="model data" guid="{0C1B4D8D-CCA5-4075-ADC0-D487AA88D1D1}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -111,7 +110,6 @@ end function]]></Code>
 	<Addon name="RSS Aggregator" guid="{1BC315FB-1ACA-4FB2-8615-DAEDBB88B5A0}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoRSSClient2.Views.AggregatorClass]]></DotNetClass>
 		<ArgumentList><![CDATA[Aggregator=[List(RSS Aggregators)]
 Story Count=5]]></ArgumentList>
@@ -194,7 +192,6 @@ ul.rssAggregator li p.raDescription {}
 	<Addon name="RSS Aggregator Process" guid="{A1635E99-01BB-4393-9555-FD69F2B0C3EE}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoRSSClient2.Views.RefreshProcessClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -238,7 +235,6 @@ ul.rssAggregator li p.raDescription {}
 	<Addon name="RSS Quick Client" guid="{8A869BAB-CE23-4DBC-A714-D39E45B6E647}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoRSSClient2.Views.QuickClass]]></DotNetClass>
 		<ArgumentList><![CDATA[URL=http://rss.cnn.com/rss/cnn_tech.rss
 RefreshHours=1

@@ -1,16 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <LangVersion>latest</LangVersion>
-	  <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <RootNamespace></RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>rss.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <OptionStrict>On</OptionStrict>    
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>aoRss</AssemblyName>
   </PropertyGroup>
@@ -30,11 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Contensive.CPBaseClass" Version="23.10.30.5" />
-    <PackageReference Include="Contensive.DbModels" Version="23.10.30.5" />
+    <PackageReference Include="Contensive.CPBaseClass" Version="26.5.30.24764" />
+    <PackageReference Include="Contensive.DbModels" Version="26.5.30.24764" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-  </ItemGroup>
 </Project>
