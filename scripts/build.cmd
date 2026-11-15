@@ -15,4 +15,5 @@ if not "%exitcode%"=="0" (
 )
 
 rem if "%nopause%"=="0" pause
+
 exit /b %exitcode%
