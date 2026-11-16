@@ -66,7 +66,7 @@ namespace Contensive.Addons.Rss.Views {
                     int suffixNumber = 1;
                     string testFilenameRoot = testFilenameNoExt;
                     string usedFilenames = "";
-                    while (suffixNumber < 100 & ($",{usedFilenames},").IndexOf($",{testFilenameNoExt},", StringComparison.OrdinalIgnoreCase) >= 0) {
+                    while (suffixNumber < 100 && ($",{usedFilenames},").IndexOf($",{testFilenameNoExt},", StringComparison.OrdinalIgnoreCase) >= 0) {
                         testFilenameNoExt = testFilenameRoot + suffixNumber.ToString();
                         suffixNumber = suffixNumber + 1;
                     }
@@ -80,7 +80,6 @@ namespace Contensive.Addons.Rss.Views {
                 }
                 //
                 // -- create a list of all RSSFeeds content fields - these are the many-to-many fields that point to story records for each feed
-                int LastTableID = -1;
                 var manyToManyFieldList = DbBaseModel.createList<ContentFieldModel>(CP, $"(name='RSSFeeds')and(type={Constants.FieldTypeManyToMany})and(authorable<>0)", "id desc");
                 foreach (var manyToManyField in manyToManyFieldList) {
                     //
@@ -107,7 +106,7 @@ namespace Contensive.Addons.Rss.Views {
                                             // -- prevent duplicate stories in the same feed
                                             bool dupFound = false;
                                             foreach (var entry in feed.entryList) {
-                                                if (entry.storyRecordID == storyRecordID & entry.storyContentID == storyContent.id) {
+                                                if (entry.storyRecordID == storyRecordID && entry.storyContentID == storyContent.id) {
                                                     dupFound = true;
                                                     break;
                                                 }
@@ -150,11 +149,22 @@ namespace Contensive.Addons.Rss.Views {
                                                     if (CP.Content.IsField(storyContent.name, "RSSDescription")) {
                                                         entry.Description = csStory.GetText("RSSDescription");
                                                     }
+                                                    if (string.IsNullOrEmpty(entry.Description) && CP.Content.IsField(storyContent.name, "Copy")) {
+                                                        //
+                                                        // -- no RSS description, use a truncated plain-text version of the post body
+                                                        string bodyCopy = csStory.GetText("Copy");
+                                                        if (!string.IsNullOrEmpty(bodyCopy)) {
+                                                            entry.Description = truncateText(CP.Utils.ConvertHTML2Text(bodyCopy), 500);
+                                                        }
+                                                    }
                                                     if (CP.Content.IsField(storyContent.name, "RSSLink")) {
                                                         entry.Link = csStory.GetText("RSSLink");
                                                     }
                                                     if (CP.Content.IsField(storyContent.name, "PodcastMediaLink")) {
                                                         entry.PodcastMediaLink = csStory.GetText("PodcastMediaLink");
+                                                    }
+                                                    if (CP.Content.IsField(storyContent.name, "blogpostpageid")) {
+                                                        entry.blogPostPageId = csStory.GetInteger("blogpostpageid");
                                                     }
                                                 }
                                                 csStory.Close();
@@ -188,7 +198,7 @@ namespace Contensive.Addons.Rss.Views {
                     var Doc = new System.Xml.XmlDocument();
                     //
                     // Build this feed
-                    if (!string.IsNullOrEmpty(feed.Link) & feed.Link.IndexOf("://") < 0) {
+                    if (!string.IsNullOrEmpty(feed.Link) && feed.Link.IndexOf("://") < 0) {
                         feed.Link = $"http://{feed.Link}";
                     }
                     //
@@ -248,8 +258,8 @@ namespace Contensive.Addons.Rss.Views {
                         }
                     }
                     foreach (var entry in feed.entryList) {
-                        if (entry.DateExpires == DateTime.MinValue | entry.DateExpires > RightNow) {
-                            if (entry.DatePublish == DateTime.MinValue | entry.DatePublish < RightNow) {
+                        if (entry.DateExpires == DateTime.MinValue || entry.DateExpires > RightNow) {
+                            if (entry.DatePublish == DateTime.MinValue || entry.DatePublish < RightNow) {
                                 //
                                 // create Item Node
                                 //
@@ -282,6 +292,11 @@ namespace Contensive.Addons.Rss.Views {
                                     if (string.IsNullOrEmpty(Link)) {
                                         if (entry.storyContentID == pageContentContentId) {
                                             Link = $"{serverPageDefault}?bid={entry.storyRecordID}".Trim();
+                                        } else if (entry.blogPostPageId > 0) {
+                                            //
+                                            // -- blog entry: resolve URL from link alias using the blog post's page id
+                                            string qs = $"BlogEntryID={entry.storyRecordID}&FormID=300";
+                                            Link = CP.Content.GetLinkAliasByPageID(entry.blogPostPageId, qs, "");
                                         }
                                     }
                                 }
@@ -432,6 +447,22 @@ namespace Contensive.Addons.Rss.Views {
                 }
             }
             return returnString;
+        }
+        //
+        //
+        //
+        /// <summary>
+        /// Truncate plain text to a maximum number of characters, breaking at a word boundary.
+        /// </summary>
+        private static string truncateText(string text, int maxLength) {
+            if (string.IsNullOrEmpty(text) || text.Length <= maxLength) {
+                return text ?? "";
+            }
+            int breakPos = text.LastIndexOf(' ', maxLength);
+            if (breakPos < 1) {
+                breakPos = maxLength;
+            }
+            return text.Substring(0, breakPos) + "...";
         }
 
     }

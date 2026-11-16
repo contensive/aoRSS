@@ -9,7 +9,7 @@ namespace Contensive.Addons.Rss.Models.Domain {
         //
         public const string contentName = "Blog Entries";      // <------ set content name
         public const string contentTableName = "ccBlogCopy";   // <------ set to tablename for the primary content (used for cache names)
-        private new const string contentDataSource = "default";             // <------ set to datasource if not default
+        private const string contentDataSource = "default";             // <------ set to datasource if not default
         // 
         // ====================================================================================================
         // -- instance properties

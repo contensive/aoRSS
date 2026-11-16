@@ -18,8 +18,6 @@ namespace Contensive.Addons.Rss.Views {
         public override object Execute(CPBaseClass CP) {
             string result = "";
             try {
-                string linkRel = "";
-                string LoopPtr = "";
                 var RSSFeedModelList = DbBaseModel.createList<RSSAggregatorSourcesModel>(CP, "id<>0");
                 if (RSSFeedModelList.Count() != 0) {
                     foreach (var RSSFeedxml in RSSFeedModelList) {
@@ -32,9 +30,8 @@ namespace Contensive.Addons.Rss.Views {
                             try {
                                 doc.Load(Link);
                             } catch (WebException ex) {
-                                string shortmsg = "RSS Aggregator error";
-                                string longmsg = $"RSS Aggrgator Sources contains a link that fails with [{ex}]";
-                                CP.Site.LogWarning(shortmsg, longmsg, shortmsg, shortmsg);
+                                CP.Site.SetSiteWarning("RSS Aggregator error", $"RSS Aggregator Sources contains a link that fails with [{ex}]");
+                                continue;
                             }
                             string ItemTitle = "";
                             string ItemLink = "";
@@ -72,11 +69,7 @@ namespace Contensive.Addons.Rss.Views {
                                                                     break;
                                                                 }
                                                             case "content": {
-                                                                    ItemDescription = ItemNode.InnerText;
-                                                                    //
-                                                                    // clear any styles out of the description
-                                                                    //
-                                                                    ItemDescription = ItemDescription;
+                                                                    ItemDescription = clearStyles(CP, ItemNode.InnerText);
                                                                     break;
                                                                 }
                                                             case "link": {
@@ -84,7 +77,7 @@ namespace Contensive.Addons.Rss.Views {
                                                                     string linkType;
                                                                     bool isFound = false;
                                                                     linkType = GetXMLAttribute(CP, isFound, ItemNode, "type");
-                                                                    if (string.IsNullOrEmpty(ItemLink) & (!isFound | linkType == "text/html")) {
+                                                                    if (string.IsNullOrEmpty(ItemLink) && (!isFound || linkType == "text/html")) {
                                                                         ItemLink = GetXMLAttribute(CP, isFound, ItemNode, "href");
                                                                     }
 
@@ -105,7 +98,7 @@ namespace Contensive.Addons.Rss.Views {
                                                     if (string.IsNullOrEmpty(itemGuid)) {
                                                         itemGuid = ItemTitle;
                                                     }
-                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, $"(itemGuid={CP.Db.EncodeSQLText(itemGuid)})and(sourceId={sourceId}))", "");
+                                                    var RSSAggregatorSourceStoryList = DbBaseModel.createList<RSSAggregatorSourceStorieModel>(CP, $"(itemGuid={CP.Db.EncodeSQLText(itemGuid)})and(sourceId={sourceId})", "");
                                                     if (RSSAggregatorSourceStoryList is null) {
                                                         var SourceStory = DbBaseModel.addDefault<RSSAggregatorSourceStorieModel>(CP);
                                                         SourceStory.pubDate = DateTime.Now;
@@ -169,11 +162,7 @@ namespace Contensive.Addons.Rss.Views {
                                                                                     break;
                                                                                 }
                                                                             case "description": {
-                                                                                    ItemDescription = ItemNode.InnerText;
-                                                                                    //
-                                                                                    // clear any styles out of the description
-                                                                                    //
-                                                                                    ItemDescription = ItemDescription;
+                                                                                    ItemDescription = clearStyles(CP, ItemNode.InnerText);
                                                                                     break;
                                                                                 }
                                                                             case "link": {

@@ -1,4 +1,4 @@
-﻿#Requires -Version 5.1
+#Requires -Version 5.1
 <#
 .SYNOPSIS
     Uploads a built collection to the Addon Collection Library on contensive.com.
@@ -7,8 +7,6 @@
     Thin wrapper that imports the shared deploy-to-addon-library module from
     Contensive5\scripts\ and calls Invoke-AddonLibraryDeploy with the
     parameters for this repo.
-
-    TODO: verify this placeholder works correctly for this repo.
 #>
 [CmdletBinding()]
 param(

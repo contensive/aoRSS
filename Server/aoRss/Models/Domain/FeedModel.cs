@@ -29,5 +29,6 @@ namespace Contensive.Addons.Rss.Models.Domain {
         // Public storyTableID As Integer
         public int storyRecordID;
         public string PodcastMediaLink;
+        public int blogPostPageId;
     }
 }

@@ -6,106 +6,10 @@ namespace Contensive.Addons.Rss.Controllers {
         //
         //
         public static string GetGMTFromDate(DateTime DateValue) {
-            string result = "";
-            int WorkLong;
-            //
-            if (DateValue != default(DateTime)) {
-                switch (DateValue.DayOfWeek) {
-                    case DayOfWeek.Sunday:
-                        result = "Sun, ";
-                        break;
-                    case DayOfWeek.Monday:
-                        result = "Mon, ";
-                        break;
-                    case DayOfWeek.Tuesday:
-                        result = "Tue, ";
-                        break;
-                    case DayOfWeek.Wednesday:
-                        result = "Wed, ";
-                        break;
-                    case DayOfWeek.Thursday:
-                        result = "Thu, ";
-                        break;
-                    case DayOfWeek.Friday:
-                        result = "Fri, ";
-                        break;
-                    case DayOfWeek.Saturday:
-                        result = "Sat, ";
-                        break;
-                }
-                //
-                WorkLong = DateValue.Day;
-                if (WorkLong < 10) {
-                    result = $"{result}0{WorkLong} ";
-                } else {
-                    result = $"{result}{WorkLong} ";
-                }
-                //
-                switch (DateValue.Month) {
-                    case 1:
-                        result = $"{result}Jan ";
-                        break;
-                    case 2:
-                        result = $"{result}Feb ";
-                        break;
-                    case 3:
-                        result = $"{result}Mar ";
-                        break;
-                    case 4:
-                        result = $"{result}Apr ";
-                        break;
-                    case 5:
-                        result = $"{result}May ";
-                        break;
-                    case 6:
-                        result = $"{result}Jun ";
-                        break;
-                    case 7:
-                        result = $"{result}Jul ";
-                        break;
-                    case 8:
-                        result = $"{result}Aug ";
-                        break;
-                    case 9:
-                        result = $"{result}Sep ";
-                        break;
-                    case 10:
-                        result = $"{result}Oct ";
-                        break;
-                    case 11:
-                        result = $"{result}Nov ";
-                        break;
-                    case 12:
-                        result = $"{result}Dec ";
-                        break;
-                }
-                //
-                result = $"{result}{DateValue.Year} ";
-                //
-                WorkLong = DateValue.Hour;
-                if (WorkLong < 10) {
-                    result = $"{result}0{WorkLong}:";
-                } else {
-                    result = $"{result}{WorkLong}:";
-                }
-                //
-                WorkLong = DateValue.Minute;
-                if (WorkLong < 10) {
-                    result = $"{result}0{WorkLong}:";
-                } else {
-                    result = $"{result}{WorkLong}:";
-                }
-                //
-                WorkLong = DateValue.Second;
-                if (WorkLong < 10) {
-                    result = $"{result}0{WorkLong}";
-                } else {
-                    result = $"{result}{WorkLong}";
-                }
-                //
-                result = $"{result} GMT";
+            if (DateValue == default) {
+                return "";
             }
-            return result;
+            return DateValue.ToUniversalTime().ToString("R");
         }
         //
         // ====================================================================================================
@@ -140,7 +44,7 @@ namespace Contensive.Addons.Rss.Controllers {
                 // -- local file system
                 string cdnFilePathPrefixAbsolute = cp.Site.GetText("CdnFilePathPrefixAbsolute")?.Replace(@"\", "/");
                 if (!string.IsNullOrWhiteSpace(cdnFilePathPrefixAbsolute)) {
-                    if (!cdnFilePathPrefixAbsolute.Substring(cdnFilePathPrefixAbsolute.Length, 1).Equals("/")) {
+                    if (cdnFilePathPrefixAbsolute[cdnFilePathPrefixAbsolute.Length - 1] != '/') {
                         cdnFilePathPrefixAbsolute += "/";
                     }
                 } else {

@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Contensive.Addons.Rss.Models.Db;
 using Contensive.BaseClasses;
 using Contensive.Models.Db;
@@ -15,19 +14,13 @@ namespace Contensive.Addons.Rss.Views {
         /// <param name="CP"></param>
         /// <returns></returns>
         public override object Execute(CPBaseClass CP) {
-            object ExecuteRet = default;
             string result = "";
-            var sw = new Stopwatch();
-            sw.Start();
             try {
-                string AggregatorName = "";
                 string cr1 = "\r\n\t";
                 string cr2 = cr1 + "\t";
                 string cr3 = cr2 + "\t";
-                string cr4 = cr3 + "\t";
                 //
                 string instanceId = CP.Doc.GetText("instanceId");
-                CP.Utils.AppendLog($"First Instance ID={instanceId}");
                 long StoryCnt = CP.Utils.EncodeInteger(CP.Doc.GetText("Story count"));
                 if (StoryCnt == 0L) {
                     StoryCnt = 5L;
@@ -37,8 +30,7 @@ namespace Contensive.Addons.Rss.Views {
                 if (RSSAggregator is not null) {
                     AggregatorId = RSSAggregator.id;
                 }
-                CP.Utils.AppendLog($"Aggregator ID={AggregatorId}");
-                if (AggregatorId == 0 | instanceId is null) {
+                if (AggregatorId == 0 || instanceId is null) {
                     //
                     // Create new aggregator
                     //
@@ -47,16 +39,9 @@ namespace Contensive.Addons.Rss.Views {
                     AggregatorId = RSSAggregator.id;
                     RSSAggregator.ccguid = instanceId;
                     RSSAggregator.save(CP);
-                    CP.Utils.AppendLog($"instanceId={instanceId}");
                 }
                 //
-                string cacheName = $"rssAggregator:{AggregatorId}:{StoryCnt}";
-                ExecuteRet = CP.Doc.GetText(cacheName);
-                if (true) {
-                    //
-                    //
-                    //
-                    var storyList = RSSAggregatorSourceStorieModel.createStoryList(CP, AggregatorId);
+                var storyList = RSSAggregatorSourceStorieModel.createStoryList(CP, AggregatorId);
                     //
                     long Ptr = 1L;
                     string list = "";
@@ -72,7 +57,6 @@ namespace Contensive.Addons.Rss.Views {
                                 }
                                 Cell = $"{Cell}{cr3}<h3 class=\"raCaption\">{Copy}</h3>";
                             }
-                            CP.Utils.AppendLog($"copy={Copy}");
                             //
                             string pubDate = story.pubDate.ToString();
                             string sourceName = (story.name ?? "").Trim();
@@ -84,7 +68,7 @@ namespace Contensive.Addons.Rss.Views {
                             if (!string.IsNullOrEmpty(pubDate)) {
                                 pubDate = $"<span  class=\"raPubDate\">{pubDate}</span >";
                             }
-                            if (!string.IsNullOrEmpty(pubDate) & !string.IsNullOrEmpty(sourceName)) {
+                            if (!string.IsNullOrEmpty(pubDate) && !string.IsNullOrEmpty(sourceName)) {
                                 Delimiter = "<span class=\"raDelimiter\">|</span>";
                             }
                             Copy = sourceName + Delimiter + pubDate;
@@ -100,18 +84,14 @@ namespace Contensive.Addons.Rss.Views {
                             list = $"{list}{cr2}<ul><li class=\"raItem\">{Cell}{cr2}</li></ul>";
 
                             //
-
-                            story.save(CP);
                             Ptr = Ptr + 1L;
                         } else {
                             break;
                         }
 
                     }
-                    if (!string.IsNullOrEmpty(list)) {
-                        ExecuteRet = $"{cr1}<ul class=\"rssAggregator\">{list}{cr1}</ul>";
-                    }
-                    result = list;
+                if (!string.IsNullOrEmpty(list)) {
+                    result = $"{cr1}<ul class=\"rssAggregator\">{list}{cr1}</ul>";
                 }
             } catch (Exception ex) {
                 CP.Site.ErrorReport(ex);

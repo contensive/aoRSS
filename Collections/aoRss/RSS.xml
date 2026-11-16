@@ -4,7 +4,9 @@
   xsi:noNamespaceSchemaLocation="https://contensive.s3.amazonaws.com/xsd/Collection.xsd"
 >
 	<HelpLink>http://support.contensive.com/rss-feeds</HelpLink>
-	<Help></Help>
+	<Help><![CDATA[Publish your site content as standard RSS 2.0 feeds that readers can subscribe to in any feed reader. Assign pages, blog posts, and newsletter stories to one or more named feeds, and a background process automatically generates and updates the XML files with correct links, descriptions, and publication dates. Feed links and feed link lists can be placed on any page so visitors can discover and subscribe to your content.
+
+Display content from external RSS and Atom feeds directly on your site using the RSS Quick Client widget, or combine multiple external sources into a single aggregated feed with the RSS Aggregator. Sources are refreshed automatically on a configurable schedule and cached locally for fast page loads.]]></Help>
 	<Addon name="RSS Aggregator" guid="{1BC315FB-1ACA-4FB2-8615-DAEDBB88B5A0}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
@@ -52,7 +54,7 @@
 			ul.rssAggregator li div.raByLine .raPubDate {}
 			ul.rssAggregator li p.raDescription {}
 			]]></Styles>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Aggregator Process" guid="{A1635E99-01BB-4393-9555-FD69F2B0C3EE}" type="Add-on">
 		<Copy></Copy>
@@ -90,7 +92,7 @@
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 		<ProcessTriggers>
 			<ContentChange name="RSS Aggregators" guid="{9BE833BA-40D2-41F6-9088-65B2F254CD8B}"/>
 			<ContentChange name="RSS Aggregator Sources" guid="{BE4976B4-3554-4B06-91F5-4CD5D3B9DBED}"/>
@@ -142,7 +144,7 @@
 			.RSSFeedLink A:hover {}
 			.RSSFeedLink A .RSSFeedImage {border:0px;}
 			]]></Styles>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Link List" guid="{B52F5254-6CF9-4890-A8AC-F2E811B42940}" type="Add-on">
 		<Copy></Copy>
@@ -190,7 +192,7 @@
 			.RSSFeedList .RSSFeedListItem A:visited {}
 			.RSSFeedList .RSSFeedListItem A:hover {}
 			]]></Styles>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="RSS Feed Process" guid="{2119C2DA-1D57-4C32-B13C-28CD2D85EDF5}" type="Add-on">
 		<Copy></Copy>
@@ -228,7 +230,7 @@
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 		<ProcessTriggers>
 			<ContentChange name="RSS Feeds" guid="{8808CE15-6204-4E2E-B650-3730AAB0F3EF}"/>
 			<ContentChange name="RSS Feed Rules" guid="{6FFF9780-AF82-4E2F-ABBD-A1C9A5EC2DBA}"/>
@@ -283,7 +285,7 @@
 			.ItemEnclosure {margin: 0 0 10px 0;float:left}
 			.ItemEnclosure A,.ItemEnclosure A:link,.ItemEnclosure A:visited,.ItemEnclosure A:hover{text-decoration:underline;color:#404040;}		
 			]]></Styles>
-		<Scripting Language="VBScript" EntryPoint="" Timeout="5000"/>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<CDef Name="Page Content" guid="{02203F58-0921-4F75-A089-0EAD6E8FEB4F}" >
 		<Field Name="rssfeeds" active="True" AdminOnly="False" Authorable="True" Caption="RSS Feeds" DeveloperOnly="False" EditSortPriority="1000" FieldType="ManyToMany" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="RSS Feeds" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="PageID" ManyToManyRuleSecondaryField="RSSFeedID" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="RSS Feeds" ManyToManyRuleContent="RSS Feed Rules" >

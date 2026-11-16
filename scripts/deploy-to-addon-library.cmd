@@ -2,11 +2,10 @@
 setlocal
 
 rem Uploads the built collection to the Addon Collection Library on contensive.com.
-rem TODO: verify CollectionName, CollectionPath, and DeploymentPath are correct for this repo.
 
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0deploy-to-addon-library.ps1" ^
     -CollectionName "aoRss" ^
-    -CollectionPath "%~dp0..\collections\aoRss" ^
+    -CollectionPath "%~dp0..\Collections\aoRss" ^
     -DeploymentPath "C:\Deployments\aoRSS" ^
     -UiPath "%~dp0..\ui"
 

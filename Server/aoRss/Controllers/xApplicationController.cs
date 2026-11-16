@@ -64,9 +64,6 @@ namespace Contensive.Addons.Rss.Controllers {
         /// <remarks></remarks>
         public xApplicationController(CPBaseClass cp, bool requiresAuthentication = true) {
             this.cp = cp;
-            string sql = "";
-            var cs = cp.CSNew();
-            string localSystemStatus = "";
             if (requiresAuthentication & !cp.User.IsAuthenticated) {
                 packageErrorList.Add(new packageErrorClass() { number = (int)Constants.resultErrorEnum.errAuthentication, description = "Authorization is required." });
                 cp.Response.SetStatus(((int)Constants.httpErrorEnum.forbidden).ToString() + " Forbidden");

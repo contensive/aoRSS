@@ -52,9 +52,9 @@ namespace Contensive.Addons.Rss.Views {
                 bool SaveCache = true;
                 string feedContent = "";
                 string feedCacheFilename = encodeFilename(rssClient.url);
-                feedCacheFilename = @"aoRSSClientFiles\" + "" + ".txt";
+                feedCacheFilename = $@"aoRSSClientFiles\{feedCacheFilename}.txt";
                 string feedCache = CP.CdnFiles.Read(feedCacheFilename);
-                if (string.IsNullOrEmpty(feedCache)) {
+                if (!string.IsNullOrEmpty(feedCache)) {
                     hint = 30;
                     //
                     // -- feed cache has content, check if valid
@@ -88,7 +88,6 @@ namespace Contensive.Addons.Rss.Views {
                         SaveCache = true;
                     } catch (Exception ex) {
                         CP.Site.ErrorReport(ex, $"Exception during fetch, rssClient.url [{rssClient.url}]");
-                        throw;
                     }
                 }
                 hint = 50;
@@ -132,13 +131,13 @@ namespace Contensive.Addons.Rss.Views {
                 }
                 hint = 90;
                 //
-                if (CP.User.IsEditingAnything) {
+                if (CP.User.IsEditing("")) {
                     result = CP.Content.GetEditLink("RSS Clients", rssClient.id.ToString(), false, "RSS Quick Client Settings", CP.User.IsAdmin) + result;
                 }
                 return result;
             } catch (Exception ex) {
                 CP.Site.ErrorReport(ex, $"hint [{hint}]");
-                throw;
+                return "";
             }
         }
         //
@@ -160,7 +159,6 @@ namespace Contensive.Addons.Rss.Views {
                 string ChannelTitle;
                 string ChannelDescription;
                 string ChannelPubDate = "";
-                string ChannelItem;
                 string ChannelLink;
                 string NewChannelImage;
                 string ItemLink;
@@ -190,7 +188,6 @@ namespace Contensive.Addons.Rss.Views {
                                         ChannelDescription = "";
                                         ChannelLink = "";
                                         ChannelImage = "";
-                                        ChannelItem = "";
                                         foreach (System.Xml.XmlNode ChannelNode in RootNode.ChildNodes) {
                                             switch ((ChannelNode.Name ?? "").ToLowerInvariant()) {
                                                 case "pubdate": {
@@ -353,8 +350,8 @@ namespace Contensive.Addons.Rss.Views {
                 return result;
             } catch (Exception ex) {
                 cp.Site.ErrorReport(ex);
-                throw;
             }
+            return "";
         }
         //
         // =================================================================================
@@ -371,13 +368,10 @@ namespace Contensive.Addons.Rss.Views {
                 //
                 string ItemPubDate;
                 string EnclosureRow;
-                int Ptr;
-                int EnclosureCnt;
                 string ChannelImage;
                 string ChannelTitle;
                 string ChannelDescription;
                 string ChannelPubDate = "";
-                string ChannelItem;
                 string ChannelLink;
                 string NewChannelImage;
                 //
@@ -403,7 +397,6 @@ namespace Contensive.Addons.Rss.Views {
                         ChannelDescription = "";
                         ChannelLink = "";
                         ChannelImage = "";
-                        ChannelItem = "";
                         bool isFound = false;
                         foreach (System.Xml.XmlNode RootNode in withBlock.ChildNodes) {
                             //
@@ -502,7 +495,6 @@ namespace Contensive.Addons.Rss.Views {
                                         ItemLink = "";
                                         ItemDescription = "";
                                         ItemPubDate = "";
-                                        EnclosureCnt = 0;
                                         foreach (System.Xml.XmlNode ItemNode in RootNode.ChildNodes) {
                                             string linkType = null;
                                             switch ((ItemNode.Name ?? "").ToLowerInvariant()) {
