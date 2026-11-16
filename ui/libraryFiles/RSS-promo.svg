@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2332"/>
+      <stop offset="100%" stop-color="#0f1620"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="200" height="240" rx="12" fill="url(#bg)"/>
+  <!-- Title -->
+  <text x="100" y="36" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="22" fill="#ffffff">RSS</text>
+  <text x="100" y="54" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-weight="400" font-size="10" fill="#94a3b8">Feeds &amp; Aggregation</text>
+  <!-- RSS icon (classic radio waves) -->
+  <circle cx="52" cy="162" r="6" fill="url(#accent)"/>
+  <path d="M52 142 A26 26 0 0 1 78 168" fill="none" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  <path d="M52 128 A40 40 0 0 1 92 168" fill="none" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <path d="M52 114 A54 54 0 0 1 106 168" fill="none" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+  <!-- Feed items (abstract content lines) -->
+  <rect x="112" y="90" width="62" height="4" rx="2" fill="#38bdf8" opacity="0.8"/>
+  <rect x="112" y="100" width="50" height="3" rx="1.5" fill="#64748b" opacity="0.5"/>
+  <rect x="112" y="108" width="55" height="3" rx="1.5" fill="#64748b" opacity="0.3"/>
+  <rect x="112" y="122" width="58" height="4" rx="2" fill="#34d399" opacity="0.8"/>
+  <rect x="112" y="132" width="45" height="3" rx="1.5" fill="#64748b" opacity="0.5"/>
+  <rect x="112" y="140" width="52" height="3" rx="1.5" fill="#64748b" opacity="0.3"/>
+  <rect x="112" y="154" width="55" height="4" rx="2" fill="#f59e0b" opacity="0.8"/>
+  <rect x="112" y="164" width="48" height="3" rx="1.5" fill="#64748b" opacity="0.5"/>
+  <rect x="112" y="172" width="42" height="3" rx="1.5" fill="#64748b" opacity="0.3"/>
+  <!-- Divider -->
+  <line x1="24" y1="192" x2="176" y2="192" stroke="#334155" stroke-width="1"/>
+  <!-- Legend -->
+  <circle cx="40" cy="210" r="4" fill="url(#bar1)"/>
+  <text x="50" y="213" font-family="'Segoe UI',Arial,sans-serif" font-size="9" fill="#94a3b8">Publish</text>
+  <circle cx="104" cy="210" r="4" fill="url(#bar2)"/>
+  <text x="114" y="213" font-family="'Segoe UI',Arial,sans-serif" font-size="9" fill="#94a3b8">Consume</text>
+  <text x="100" y="232" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="8" fill="#475569">Contensive Addon</text>
+</svg>
