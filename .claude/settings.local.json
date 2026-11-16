@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git -C /c/Git/aoRSS ls-files \"Collections/**/*.zip\")",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npx --yes resvg-cli:*)"
     ]
   }
 }
